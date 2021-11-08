@@ -71,10 +71,11 @@ def export_list():
     notes = Note.query.filter(Note.is_active).all()
     flash('Exporting list now, please wait...', category='info')
     with open('ideas.txt', 'a') as file:
-        file.write('<h1>Dinner Ideas</h1><br />')
+        file.write('---Dinner Ideas---\n')
         for note in notes:
-            file.write(str(note) + '\n')
-
+            file.write(str(note.data) + '\n')
+            note.is_active = False
+            db.session.commit()
     system(f'/usr/bin/lpr {file}')
     flash('Export complete,', category='success')
 

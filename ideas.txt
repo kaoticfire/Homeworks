@@ -1,2 +1,9 @@
-<h1>Dinner Ideas</h1><br /><h1>Dinner Ideas</h1><br /><Note 1>
-<Note 2>
+---Dinner Ideas---
+tacos
+pizza
+meatloaf
+spaghetti
+lasagna
+steak and eggs
+biscuits and gravy
+fish and chips
