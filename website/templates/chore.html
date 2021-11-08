@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+<h1 align="center">Chore List</h1>
+<ul class="list-group list-group-flush" id="chores">
+  {% if user.is_parent %}
+    {% for chore in chores %}
+        {% if chore.is_active %}
+        <li class="list-group-item">
+            {{ chore.data }}
+            <button type="button" class="close" onClick="deleteChore({{ chore.id }})">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </li>
+        {% endif %}
+    {% endfor %}
+  {% else %}
+    {% for chore in chores %}
+        {% if chore.is_active %}
+        <li class="list-group-item">
+            {{ chore.data }}
+            <button type="button" class="close" onClick="deleteChore({{ chore.id }})">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </li>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
+</ul>
+{% endblock %}

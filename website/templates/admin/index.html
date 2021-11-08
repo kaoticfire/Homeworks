@@ -1,0 +1,11 @@
+{% extends 'admin/master.html' %}
+{% block title %}Administration{% endblock %}
+{% block menu_links %}
+    {{ super() }}
+    <button style="border:0px; height=40px; color:black; padding:10px;"><a class="nav-item" id="ideas" href="/">Ideas</a></button>
+    <button style="border:0px; height=40px; color:black; padding:10px;"><a class="nav-item" id="chores" href="/chore">Chore</a></button>
+    <button style="border:0px; height=40px; color:black; padding:10px;"><a class="nav-item" id="report" href="/report">Report</a></button>
+    <button style="border:0px; height=40px; color:black; padding:10px;"><a class="nav-item" id="logout" href="/logout">Logout</a></button>
+{% endblock %}
+{% block body %}
+{% endblock %}
