@@ -3,6 +3,7 @@ from .models import User
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
+from datetime import timedelta
 
 auth = Blueprint('auth', __name__)
 
@@ -17,7 +18,7 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
-                login_user(user, remember=True)
+                login_user(user, remember=True, duration=timedelta(hours=24))
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
