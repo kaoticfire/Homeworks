@@ -21,7 +21,7 @@ def login():
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('views.home'))
         else:
-            flash('Login Unsuccessful. Please check email and password', 'danger')
+            flash('Login Unsuccessful. Please check email and password', 'error')
     return render_template('login.html', title='Login', form=form, user=current_user)
 
 
@@ -36,15 +36,15 @@ def reset_request():
         user = User.query.filter_by(email=email).first()
         if user:
             if len(email) < 5:
-                flash('Email must be greater than 4 characters.', category='error')
+                flash('Email must be greater than 4 characters.', 'error')
             elif password1 != password2:
-                flash('Passwords do not match.', category='warning')
+                flash('Passwords do not match.', 'warning')
             elif len(password1) < 8:
-                flash('Password must be greater than 7 characters.', category='error')
+                flash('Password must be greater than 7 characters.', 'error')
             else:
                 user.password = generate_password_hash(password1, method='sha256')
                 db.session.commit()
-                flash('Password has been successfully reset', category='success')
+                flash('Password has been successfully reset', 'success')
                 return redirect(url_for('views.home'))
 
     return render_template('reset_request.html', user=current_user)

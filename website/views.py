@@ -15,7 +15,7 @@ def home():
     if request.method == 'POST':
         note = request.form.get('note')
         if len(note) < 5:
-            flash('Idea is too short', category='error')
+            flash('Idea is too short', 'error')
         else:
             new_note = Note(data=note, user_id=current_user.id)
             db.session.add(new_note)
@@ -30,12 +30,12 @@ def chore():
     if request.method == 'POST':
         chore = request.form.get('chore')
         if len(chore) < 5:
-            flash('Idea is too short', category='error')
+            flash('Idea is too short', 'error')
         else:
             new_chore = Chore(data=chore, user_id=current_user.id)
             db.session.add(new_chore)
             db.session.commit()
-            flash('Chore added!', category='success')
+            flash('Chore added!', 'success')
     return render_template('chore.html', user=current_user, chores=chores)
 
 
@@ -68,7 +68,7 @@ def delete_chore():
 @views.route('/report')
 def export_list():
     notes = Note.query.filter(Note.is_active).all()
-    flash('Exporting list now, please wait...', category='info')
+    flash('Exporting list now, please wait...', 'info')
     with open('ideas.txt', 'a') as file:
         file.write('---Dinner Ideas---\n')
         for note in notes:
@@ -76,6 +76,6 @@ def export_list():
             note.is_active = False
             db.session.commit()
     system(f'/usr/bin/lpr {file}')
-    flash('Export complete,', category='success')
+    flash('Export complete,', 'success')
 
     return redirect(url_for('views.home'))
