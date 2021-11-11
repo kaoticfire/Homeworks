@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DinnerIdeas.iml" filepath="$PROJECT_DIR$/.idea/DinnerIdeas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HooverWeb/.idea/HooverWeb.iml" filepath="$PROJECT_DIR$/../HooverWeb/.idea/HooverWeb.iml" />
     </modules>
   </component>
 </project>

@@ -11,12 +11,20 @@ class Note(db.Model):
     is_active = db.Column(db.Boolean, default=True)
 
 
-class Chore(db.Model):
+class Tasks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(100))
+    task = db.Column(db.Integer, db.ForeignKey('chore.id'))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     is_active = db.Column(db.Boolean, default=False)
+    is_approved = db.Column(db.Boolean, default=False)
+
+
+class Chore(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.String(100))
+    is_weekend = db.Column(db.Boolean, default=True)
+    chores = db.relationship('Tasks')
 
 
 class User(db.Model, UserMixin):
@@ -25,5 +33,5 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note', backref='author', lazy=True)
-    chores = db.relationship('Chore')
+    chores = db.relationship('Tasks')
     is_parent = db.Column(db.Boolean, default=False)
