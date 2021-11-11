@@ -5,12 +5,18 @@
 <ul class="list-group list-group-flush" id="notes">
   {% for note in notes %}
     {% if note.is_active %}
-        <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </li>
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="text-muted" href="#">{{ note.author.first_name }}</a>
+                    <small class="text-muted"> - {{ note.date }}</small>
+                    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <p class="article-content"> {{ note.data }}</p>
+            </div>
+        </article>
     {% endif %}
   {% endfor %}
 </ul>
