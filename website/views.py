@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
-from os import system
+from os import system, path
 from flask_login import login_required, current_user
 from .models import Note, Chore
-from . import db
+from .forms import UpdateAccountForm
+from . import db, app
 import json
+from PIL import Image
+from secrets import token_hex
 
 views = Blueprint('views', __name__)
 
@@ -28,8 +31,8 @@ def home():
 def chore():
     chores = Chore.query.all()
     if request.method == 'POST':
-        chore = request.form.get('chore')
-        if len(chore) < 5:
+        task = request.form.get('chore')
+        if len(task) < 5:
             flash('Idea is too short', 'error')
         else:
             new_chore = Chore(data=chore, user_id=current_user.id)
@@ -54,10 +57,10 @@ def delete_note():
 
 @views.route('/delete-chore', methods=['POST'])
 def delete_chore():
-    chore = json.loads(request.data)
-    chore_id = chore['choreId']
-    chore = chore.query.get(chore_id)
-    if chore:
+    task = json.loads(request.data)
+    chore_id = task['choreId']
+    task = task.query.get(chore_id)
+    if task:
         if chore.user_id == current_user.id or current_user.is_parent:
             chore.is_active = False
             db.session.commit()
@@ -79,3 +82,38 @@ def export_list():
     flash('Export complete,', 'success')
 
     return redirect(url_for('views.home'))
+
+
+def save_picture(form_picture):
+    random_hex = token_hex(8)
+    _, f_ext = path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = path.join(app.root_path, 'static/pics', picture_fn)
+
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
+
+
+@app.route("/account", methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.img_file = picture_file
+        current_user.first_name = form.first_name.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.first_name.data = current_user.first_name
+        form.email.data = current_user.email
+    img_file = url_for('static', filename='/pics/' + current_user.img_file)
+    return render_template('account.html', title='Account',
+                           image_file=img_file, form=form)

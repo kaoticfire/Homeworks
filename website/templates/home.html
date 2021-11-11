@@ -3,6 +3,7 @@
   {% for note in notes %}
     {% if note.is_active %}
         <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='pics/' + note.author.img_file) }}">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ note.author.first_name }}</a>
@@ -19,7 +20,7 @@
     {% endif %}
   {% endfor %}
 <form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
+  <textarea name="note" id="note" class="form-control" spellcheck="true" maxlength="1000"></textarea>
   <br />
   <div align="center">
     <button type="submit" class="btn btn-primary">Add Idea</button>

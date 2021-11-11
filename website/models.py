@@ -16,7 +16,6 @@ class Tasks(db.Model):
     task = db.Column(db.Integer, db.ForeignKey('chore.id'))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    img_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     is_active = db.Column(db.Boolean, default=False)
     is_approved = db.Column(db.Boolean, default=False)
 
@@ -33,6 +32,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     first_name = db.Column(db.String(150), nullable=False)
+    img_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     notes = db.relationship('Note', backref='author', lazy=True)
     chores = db.relationship('Tasks')
     is_parent = db.Column(db.Boolean, default=False)

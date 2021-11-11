@@ -63,7 +63,7 @@ def sign_up():
         return redirect(url_for('views.home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data,
+        user = User(first_name=form.first_name.data, email=form.email.data,
                     password=generate_password_hash(form.password.data, method='sha256'))
         db.session.add(user)
         db.session.commit()
