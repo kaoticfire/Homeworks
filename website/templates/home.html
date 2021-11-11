@@ -1,32 +1,28 @@
-{% extends "base.html" %}
-{% block title %}Home{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
 <h1 align="center">Dinner Ideas</h1>
-<ul class="list-group list-group-flush" id="notes">
   {% for note in notes %}
     {% if note.is_active %}
         <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="text-muted" href="#">{{ note.author.first_name }}</a>
-                    <small class="text-muted"> - {{ note.date }}</small>
-                    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <p class="article-content"> {{ note.data }}</p>
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ note.author.first_name }}</a>
+              <small class="text-muted"> - {{ note.date }}</small>
+              <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div>
+                <p class="article-content">{{ note.data }}</p>
+            </div>
+          </div>
         </article>
     {% endif %}
   {% endfor %}
-</ul>
 <form method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
-    <br />
-    <div align="center">
-        <button type="submit" class="btn btn-primary">Add Idea</button>
-    </div>
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Idea</button>
+  </div>
 </form>
 {% endblock %}
-
-

@@ -25,7 +25,6 @@ def home():
 
 
 @views.route('/chore', methods=['GET', 'POST'])
-@login_required
 def chore():
     chores = Chore.query.all()
     if request.method == 'POST':
@@ -41,7 +40,6 @@ def chore():
 
 
 @views.route('/delete-note', methods=['POST'])
-@login_required
 def delete_note():
     note = json.loads(request.data)
     note_id = note['noteId']
@@ -55,7 +53,6 @@ def delete_note():
 
 
 @views.route('/delete-chore', methods=['POST'])
-@login_required
 def delete_chore():
     chore = json.loads(request.data)
     chore_id = chore['choreId']
@@ -69,7 +66,6 @@ def delete_chore():
 
 
 @views.route('/report')
-@login_required
 def export_list():
     notes = Note.query.filter(Note.is_active).all()
     flash('Exporting list now, please wait...', category='info')
