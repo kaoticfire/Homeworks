@@ -4,7 +4,7 @@
     {% if note.is_active %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ url_for('static', filename='pics/' + note.author.img_file) }}">
-          <div class="media-body">
+          <div class="media-body" style="padding-left:15px;">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ note.author.first_name }}</a>
               <small class="text-muted"> - {{ note.date }}</small>

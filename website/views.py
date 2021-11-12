@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from os import system, path
 from flask_login import login_required, current_user
-from .models import Note, Chore
+from .models import Note, Chore, User
 from .forms import UpdateAccountForm
 from . import db, app
 import json
@@ -94,7 +94,6 @@ def save_picture(form_picture):
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
-
     return picture_fn
 
 
