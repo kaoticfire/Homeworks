@@ -14,7 +14,10 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    notes = Note.query.all()
+    page = request.args.get('page', 1, type=int)
+    notes = Note.query.paginate(page=page, per_page=5)
+    # return render_template('home.html', posts=note)
+    # notes = Note.query.paginate()
     if request.method == 'POST':
         note = request.form.get('note')
         if len(note) < 5:
@@ -24,7 +27,7 @@ def home():
             db.session.add(new_note)
             db.session.commit()
             flash('Idea added!', category='success')
-    return render_template('home.html', user=current_user, notes=notes)
+    return render_template('home.html', user=current_user, notes=notes, )
 
 
 @views.route('/chore', methods=['GET', 'POST'])
