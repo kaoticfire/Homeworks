@@ -21,7 +21,7 @@ def create_app():
     app.config['MAIL_Port'] = 587
     app.config['MAIL_USE_TLS'] = True
     app.config['MAIL_USERNAME'] = '12354.e.place@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'qvmwexnkmkrhnppm'
+    app.config['MAIL_PASSWORD'] = 'Vzg6rtbYB880'
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
     mail.init_app(app)
