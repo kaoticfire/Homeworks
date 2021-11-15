@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from os import system, path
 from flask_login import login_required, current_user
-from .models import Note, Chore, User
+from .models import Note, Chore
 from .forms import UpdateAccountForm
-from . import db, app
+from . import db, app, mail
 import json
 from PIL import Image
 from secrets import token_hex
+from flask_mail import Message
 
 views = Blueprint('views', __name__)
 
@@ -16,8 +17,6 @@ views = Blueprint('views', __name__)
 def home():
     page = request.args.get('page', 1, type=int)
     notes = Note.query.paginate(page=page, per_page=5)
-    # return render_template('home.html', posts=note)
-    # notes = Note.query.paginate()
     if request.method == 'POST':
         note = request.form.get('note')
         if len(note) < 5:
@@ -75,13 +74,16 @@ def delete_chore():
 def export_list():
     notes = Note.query.filter(Note.is_active).all()
     flash('Exporting list now, please wait...', 'info')
+    msg = Message('---Dinner Ideas---', sender=app.config['MAIL_USERNAME'], recipients=[current_user.email])
     with open('ideas.txt', 'a') as file:
         file.write('---Dinner Ideas---\n')
         for note in notes:
             file.write(str(note.data) + '\n')
+            msg.body = str(note.data) + '\n'
             note.is_active = False
             db.session.commit()
     system(f'/usr/bin/lpr {file}')
+    mail.send(msg)
     flash('Export complete,', 'success')
 
     return redirect(url_for('views.home'))
