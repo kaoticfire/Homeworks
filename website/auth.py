@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
-from .forms import LoginForm, RegistrationForm
-from . import db
+from .forms import LoginForm, RegistrationForm, ResetPasswordForm, RequestResetForm
+from . import db, mail, app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from datetime import timedelta
+from flask_mail import Message
 
 auth = Blueprint('auth', __name__)
 
@@ -23,31 +24,6 @@ def login():
         else:
             flash('Login Unsuccessful. Please check email and password', 'error')
     return render_template('login.html', title='Login', form=form, user=current_user)
-
-
-@auth.route('/reset_request', methods=['GET', 'POST'])
-def reset_request():
-    # TODO: Add password reset capabilities.
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
-
-        user = User.query.filter_by(email=email).first()
-        if user:
-            if len(email) < 5:
-                flash('Email must be greater than 4 characters.', 'error')
-            elif password1 != password2:
-                flash('Passwords do not match.', 'warning')
-            elif len(password1) < 8:
-                flash('Password must be greater than 7 characters.', 'error')
-            else:
-                user.password = generate_password_hash(password1, method='sha256')
-                db.session.commit()
-                flash('Password has been successfully reset', 'success')
-                return redirect(url_for('views.home'))
-
-    return render_template('reset_request.html', user=current_user)
 
 
 @auth.route('/logout')
@@ -70,3 +46,42 @@ def sign_up():
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('auth.login'))
     return render_template('sign_up.html', title='Register', form=form, user=current_user)
+
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    msg.body = f''' To reset your password, visit the following link:
+{url_for('auth.reset_token', token=token, _external=True)}
+If you did not make this request, then ignore this email but notify the website administrator.'''
+    mail.send(msg)
+
+
+@auth.route('/reset_password', methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('views.home'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An email has been sent with instructions to reset your password', 'success')
+        return redirect(url_for('auth.login'))
+    return render_template('reset_request.html', title='Reset Password', form=form)
+
+
+@auth.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('views.home'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('That token is invalid or expired.', 'warning')
+        return redirect(url_for('auth.reset_request'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.password = generate_password_hash(form.password.data, method='sha256')
+        db.session.commit()
+        flash('Your password has been updated! You are now able to log in', 'success')
+        return redirect(url_for('auth.login'))
+    return render_template('reset_token.html', title='Rest Password', form=form)

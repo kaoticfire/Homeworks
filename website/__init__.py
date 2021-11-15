@@ -4,19 +4,27 @@ from os import path
 from flask_admin import Admin
 from flask_login import LoginManager
 from .admin import MyView, MyAdminIndexView
+from flask_mail import Mail
 
 db = SQLAlchemy()
 admin = Admin()
 DB_NAME = 'database.db'
 app = Flask(__name__)
+mail = Mail()
 
 
 def create_app():
     app.config['SECRET_KEY'] = 'fdsajfhsdk;f jdskfj;a;j'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+    app.config['MAIL_Port'] = 587
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USERNAME'] = '12354.e.place@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'Vzg6rtbYB880'
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
+    mail.init_app(app)
 
     from .views import views
     from .auth import auth
