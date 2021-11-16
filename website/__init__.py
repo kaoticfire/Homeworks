@@ -27,17 +27,17 @@ def create_app():
     admin.init_app(app, index_view=MyAdminIndexView())
     mail.init_app(app)
 
-    from chores import routes as c
-    from ideas import routes as i
-    from main import routes as m
-    from users import routes as u
-    from supplies import routes as n
+    from chores.routes import chores
+    from ideas.routes import ideas
+    from main.routes import main
+    from users.routes import users
+    from supplies.routes import supply
 
-    app.register_blueprint(c.chores, url_prefix='/')
-    app.register_blueprint(i.ideas, url_prefix='/')
-    app.register_blueprint(m.main, url_prefix='/')
-    app.register_blueprint(u.users, url_prefix='/')
-    app.register_blueprint(n.needed, url_prefix='/')
+    app.register_blueprint(chores, url_prefix='/')
+    app.register_blueprint(ideas, url_prefix='/')
+    app.register_blueprint(main, url_prefix='/')
+    app.register_blueprint(users, url_prefix='/')
+    app.register_blueprint(supply, url_prefix='/')
 
     from .models import User, Note, Chore, Needed
 

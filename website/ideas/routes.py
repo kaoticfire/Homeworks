@@ -1,5 +1,5 @@
 from flask import Blueprint, request, flash, redirect, jsonify, url_for
-from website.models import Note
+from website.models import Note, Needed
 from website import db, app, mail
 from flask_login import current_user
 from flask_mail import Message
@@ -14,11 +14,12 @@ def delete_note():
     note = json.loads(request.data)
     note_id = note['noteId']
     note = Note.query.get(note_id)
+    supply = Needed.query.filter_by(data=note.data)
     if note:
         if note.user_id == current_user.id or current_user.is_parent:
             note.is_active = False
+            db.session.delete(supply)
             db.session.commit()
-
     return jsonify({})
 
 

@@ -6,10 +6,10 @@ from flask_mail import Message
 from os import system
 import json
 
-needed = Blueprint('supplies', __name__)
+supply = Blueprint('supplies', __name__)
 
 
-@needed.route('/supplies', methods=['GET', 'POST'])
+@supply.route('/supplies', methods=['GET', 'POST'])
 @login_required
 def supplies():
     page = request.args.get('page', 1, type=int)
@@ -26,20 +26,20 @@ def supplies():
     return render_template('supplies.html', user=current_user, needed=needed, )
 
 
-@needed.route('/delete-supply', methods=['POST'])
+@supply.route('/delete-supply', methods=['POST'])
 def delete_supply():
-    supply = json.loads(request.data)
-    supply_id = supply['supplyId']
-    supply = Needed.query.get(supply_id)
+    supplys = json.loads(request.data)
+    supply_id = supplys['supplyId']
+    supplys = Needed.query.get(supply_id)
     if supply:
-        if supply.user_id == current_user.id or current_user.is_parent:
-            supply.is_active = False
+        if supplys.user_id == current_user.id or current_user.is_parent:
+            supplys.is_active = False
             db.session.commit()
 
     return jsonify({})
 
 
-@needed.route('/supply_report')
+@supply.route('/supply_report')
 def export_list():
     notes = Needed.query.filter(Needed.is_active).all()
     flash('Exporting list now, please wait...', 'info')
