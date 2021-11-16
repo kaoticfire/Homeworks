@@ -35,9 +35,11 @@
           {% if current_user.is_authenticated %}
             <a class="nav-item nav-link" id="ideas" href="/">Ideas</a>
               <a class="nav-item nav-link" id="chores" href="/chore">Chore</a>
+              <a class="nav-item nav-link" id="supplies" href="/supplies">Supplies</a>
               {% if current_user.is_parent %}
                 <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
-                <a class="nav-item nav-link" id="report" href="/report">Report</a>
+                <!--a class="nav-item nav-link" id="report_ideat" href="/report">Report Ideas</a-->
+                <a class="nav-item nav-link" id="report_supply" href="/supply_report">Report Supplies</a>
               {% endif %}
             <a class="nav-item nav-link" id="account" href="/account">Account</a>
             <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>

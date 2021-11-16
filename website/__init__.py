@@ -3,14 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_admin import Admin
 from flask_login import LoginManager
-from .admin import MyView, MyAdminIndexView
+from website.views import MyView, MyAdminIndexView
 from flask_mail import Mail
 
 db = SQLAlchemy()
 admin = Admin()
+mail = Mail()
 DB_NAME = 'database.db'
 app = Flask(__name__)
-mail = Mail()
 
 
 def create_app():
@@ -20,31 +20,37 @@ def create_app():
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_Port'] = 587
     app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
     app.config['MAIL_USERNAME'] = '12354.e.place@gmail.com'
     app.config['MAIL_PASSWORD'] = 'Vzg6rtbYB880'
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
     mail.init_app(app)
 
-    from .views import views
-    from .auth import auth
+    from chores import routes as c
+    from ideas import routes as i
+    from main import routes as m
+    from users import routes as u
+    from needed import routes as n
 
-    app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(c.chores, url_prefix='/')
+    app.register_blueprint(i.ideas, url_prefix='/')
+    app.register_blueprint(m.main, url_prefix='/')
+    app.register_blueprint(u.users, url_prefix='/')
+    app.register_blueprint(n.needed, url_prefix='/')
 
     from .models import User, Note, Chore
 
     admin.add_views(MyView(User, db.session), MyView(Note, db.session), MyView(Chore, db.session))
     create_database(app)
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = 'users.login'
     login_manager.login_message = 'Authorized Access Only'
     login_manager.init_app(app)
 
     @login_manager.user_loader
-    def load_user(id):
-        return User.query.get(int(id))
-
+    def load_user(user_id):
+        return User.query.get(int(user_id))
     return app
 
 

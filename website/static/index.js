@@ -17,3 +17,11 @@ function deleteChore(choreId) {
 window.setTimeout(function() {
     $(".alert").fadeTo(500, 0)
 }, 4000);
+function deleteSupply(supplyId) {
+  fetch("/delete-supply", {
+    method: "POST",
+    body: JSON.stringify({ supplyId: supplyId }),
+  }).then((_res) => {
+    window.location.href = "/supplies";
+  });
+}

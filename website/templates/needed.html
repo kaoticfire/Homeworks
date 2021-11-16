@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+<h1 align="center">Supplies Neededs</h1>
+  {% for item in needed.items %}
+    {% if item.is_active %}
+        <article class="media content-section">
+          <!--Maybe add picture of dinner idea.-->
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-1 ml-2" href="#">{{ item.author.first_name }}</a>
+              <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
+              <button type="button" class="close" onClick="deleteSupply({{ item.id }})">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div>
+                <p class="article-content ml-2">{{ item.data }}</p>
+            </div>
+          </div>
+        </article>
+    {% endif %}
+  {% endfor %}
+  {% for page_num in needed.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+      {% if needed.page == page_num %}
+        <a class="btn btn-outline-info disabled mb-4" href="{{ url_for('needed.supplies', page=page_num) }}">{{ page_num }}</a>
+      {% else %}
+        <a class="btn btn-link mb-4" href="{{ url_for('needed.supplies', page=page_num) }}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ..
+    {% endif %}
+  {% endfor %}
+  <br />
+<form method="POST">
+  <textarea name="supply" id="supply" class="form-control" spellcheck="true" maxlength="1000"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Idea</button>
+  </div>
+</form>
+{% endblock %}
