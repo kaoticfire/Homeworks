@@ -6,7 +6,7 @@ from flask_mail import Message
 from os import system
 import json
 
-needed = Blueprint('needed', __name__)
+needed = Blueprint('supplies', __name__)
 
 
 @needed.route('/supplies', methods=['GET', 'POST'])
@@ -23,11 +23,11 @@ def supplies():
             db.session.add(new_supply)
             db.session.commit()
             flash('Supply added!', category='success')
-    return render_template('needed.html', user=current_user, needed=needed, )
+    return render_template('supplies.html', user=current_user, needed=needed, )
 
 
 @needed.route('/delete-supply', methods=['POST'])
-def delete_note():
+def delete_supply():
     supply = json.loads(request.data)
     supply_id = supply['supplyId']
     supply = Needed.query.get(supply_id)
@@ -54,5 +54,4 @@ def export_list():
     system(f'/usr/bin/lpr {file}')
     mail.send(msg)
     flash('Export complete,', 'success')
-
-    return redirect(url_for('needed.supplies'))
+    return redirect(url_for('supplies.supplies'))

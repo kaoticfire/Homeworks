@@ -1,5 +1,5 @@
-from flask import Blueprint, request, flash, render_template, jsonify
-from website.models import Chore, Tasks
+from flask import Blueprint, request, render_template, jsonify
+from website.models import Chore
 from website import db
 from flask_login import current_user
 from datetime import datetime as dt
@@ -11,20 +11,10 @@ chores = Blueprint('chores', __name__)
 @chores.route('/chore')
 def chore():
     current_day = dt.today().weekday()
-    # chore_split = []
     if current_day < 5:
         chores_todo = Chore.query.filter_by(is_weekend=False)
     else:
         chores_todo = Chore.query.all()
-    # for iteration, row in enumerate(chores_todo):
-    #     chore_split.append(row)
-    #     if iteration <= int(len(chore_split) / 2):
-    #         new_task = Tasks(task=chore_split, user_id=2)
-    #     else:
-    #         new_task = Tasks(task=chore_split, user_id=3)
-    # db.session.add(new_task)
-    # db.session.commit()
-    # tasks = Tasks.query.filter_by(is_active=True)
     return render_template('chore.html', user=current_user, chores=chores_todo)
 
 

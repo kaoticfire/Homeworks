@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_admin import Admin
 from flask_login import LoginManager
-from website.views import MyView, MyAdminIndexView
+from website.admin import MyView, MyAdminIndexView
 from flask_mail import Mail
 
 db = SQLAlchemy()
@@ -31,7 +31,7 @@ def create_app():
     from ideas import routes as i
     from main import routes as m
     from users import routes as u
-    from needed import routes as n
+    from supplies import routes as n
 
     app.register_blueprint(c.chores, url_prefix='/')
     app.register_blueprint(i.ideas, url_prefix='/')
@@ -39,9 +39,10 @@ def create_app():
     app.register_blueprint(u.users, url_prefix='/')
     app.register_blueprint(n.needed, url_prefix='/')
 
-    from .models import User, Note, Chore
+    from .models import User, Note, Chore, Needed
 
-    admin.add_views(MyView(User, db.session), MyView(Note, db.session), MyView(Chore, db.session))
+    admin.add_views(MyView(User, db.session), MyView(Note, db.session),
+                    MyView(Chore, db.session), MyView(Needed, db.session))
     create_database(app)
     login_manager = LoginManager()
     login_manager.login_view = 'users.login'

@@ -22,7 +22,7 @@
   {% for page_num in needed.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
     {% if page_num %}
       {% if needed.page == page_num %}
-        <a class="btn btn-outline-info disabled mb-4" href="{{ url_for('needed.supplies', page=page_num) }}">{{ page_num }}</a>
+        <a class="btn btn-outline-info disabled mb-4" href="{{ url_for('supplies.supplies', page=page_num) }}">{{ page_num }}</a>
       {% else %}
         <a class="btn btn-link mb-4" href="{{ url_for('needed.supplies', page=page_num) }}">{{ page_num }}</a>
       {% endif %}
