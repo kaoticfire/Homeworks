@@ -1,4 +1,5 @@
-from . import db, app
+from . import db
+from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -49,12 +50,12 @@ class User(db.Model, UserMixin):
     is_parent = db.Column(db.Boolean, default=False)
 
     def get_reset_token(self, expires_sec=600):
-        sizer = Serializer(app.config['SECRET_KEY'], expires_sec)
+        sizer = Serializer(current_app.config['SECRET_KEY'], expires_sec)
         return sizer.dumps({'user_id': self.id}).decode('utf-8')
 
     @staticmethod
     def verify_reset_token(token):
-        sizer = Serializer(app.config['SECRET_KEY'])
+        sizer = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = sizer.loads(token)['user_id']
         except:

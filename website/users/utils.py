@@ -1,16 +1,16 @@
 from PIL import Image
 from secrets import token_hex
 from os import path
-from website import app, mail
+from website import mail
 from flask_mail import Message
-from flask import url_for
+from flask import url_for, current_app
 
 
 def save_picture(form_picture):
     random_hex = token_hex(8)
     _, f_ext = path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = path.join(app.root_path, 'static/pics', picture_fn)
+    picture_path = path.join(current_app.root_path, 'static/pics', picture_fn)
 
     output_size = (125, 125)
     i = Image.open(form_picture)
@@ -21,7 +21,7 @@ def save_picture(form_picture):
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message(subject='Password Reset Request', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    msg = Message(subject='Password Reset Request', sender=current_app.config['MAIL_USERNAME'], recipients=[user.email])
     msg.body = f''' To reset your password, visit the following link:
 {url_for('users.reset_token', token=token, _external=True)}
 If you did not make this request, then ignore this email but notify the website administrator.'''

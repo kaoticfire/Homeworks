@@ -1,6 +1,6 @@
-from flask import Blueprint, request, flash, redirect, jsonify, url_for, render_template
+from flask import Blueprint, request, flash, redirect, jsonify, url_for, render_template, current_app
 from website.models import Needed
-from website import db, app, mail
+from website import db, mail
 from flask_login import current_user, login_required
 from flask_mail import Message
 from os import system
@@ -43,7 +43,7 @@ def delete_supply():
 def export_list():
     notes = Needed.query.filter(Needed.is_active).all()
     flash('Exporting list now, please wait...', 'info')
-    msg = Message('---Dinner Ideas---', sender=app.config['MAIL_USERNAME'], recipients=[current_user.email])
+    msg = Message('---Dinner Ideas---', sender=current_app.config['MAIL_USERNAME'], recipients=[current_user.email])
     with open('ideas.txt', 'a') as file:
         file.write('---Dinner Ideas---\n')
         for note in notes:

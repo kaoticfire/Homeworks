@@ -9,7 +9,7 @@ class MyView(ModelView):
         return current_user.is_authenticated and current_user.is_parent
 
     def inaccessible_callback(self, name, **kwargs):
-        return render_template('403.html')
+        return render_template('errors/403.html')
 
     def is_visible(self):
         return current_user.is_authenticated and current_user.is_parent
@@ -20,7 +20,7 @@ class MyAdminIndexView(AdminIndexView):
         return current_user.is_authenticated and current_user.is_parent
 
     def inaccessible_callback(self, name, **kwargs):
-        return render_template('403.html')
+        return render_template('errors/403.html')
 
     def is_visible(self):
         return current_user.is_authenticated and current_user.is_parent

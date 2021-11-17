@@ -1,21 +1,27 @@
 from flask import Blueprint, request, render_template, jsonify
-from website.models import Chore
+from website.chores.utils import chore_sorting
 from website import db
 from flask_login import current_user
-from datetime import datetime as dt
 import json
+from pathlib import Path
 
 chores = Blueprint('chores', __name__)
 
 
 @chores.route('/chore')
 def chore():
-    current_day = dt.today().weekday()
-    if current_day < 5:
-        chores_todo = Chore.query.filter_by(is_weekend=False)
+    all_chores = []
+    database = str(Path(__file__).parent) + '/database.db'
+    chores_todo = chore_sorting(database)
+    if current_user.id == 2:
+        tasks = chores_todo[1]
+    elif current_user.id == 3:
+        tasks = chores_todo[0]
     else:
-        chores_todo = Chore.query.all()
-    return render_template('chore.html', user=current_user, chores=chores_todo)
+        all_chores.append(chores_todo[0])
+        all_chores.append(chores_todo[1])
+        tasks = all_chores
+    return render_template('chore.html', user=current_user, chores=tasks)
 
 
 @chores.route('/delete-chore', methods=['POST'])
