@@ -13,14 +13,14 @@ users = Blueprint('users', __name__)
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('ideas.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data, duration=timedelta(hours=24))
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))
+            return redirect(next_page) if next_page else redirect(url_for('ideas.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'error')
     return render_template('login.html', title='Login', form=form, user=current_user)
@@ -36,7 +36,7 @@ def logout():
 @users.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('ideas.home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(first_name=form.first_name.data, email=form.email.data,
@@ -51,7 +51,7 @@ def sign_up():
 @users.route('/reset_password', methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('ideas.home'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -64,7 +64,7 @@ def reset_request():
 @users.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('ideas.home'))
     user = User.verify_reset_token(token)
     if user is None:
         flash('That token is invalid or expired.', 'warning')

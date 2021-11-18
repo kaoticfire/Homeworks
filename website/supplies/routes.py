@@ -1,5 +1,6 @@
 from flask import Blueprint, request, flash, redirect, jsonify, url_for, render_template, current_app
 from website.models import Needed
+from website.supplies.forms import SupplyForm
 from website import db, mail
 from flask_login import current_user, login_required
 from flask_mail import Message
@@ -24,6 +25,19 @@ def supplies():
             db.session.commit()
             flash('Supply added!', category='success')
     return render_template('supplies.html', user=current_user, needed=needed, )
+
+
+@supply.route("/new_supply", methods=['GET', 'POST'])
+def new_idea():
+    form = SupplyForm()
+    if form.validate_on_submit():
+        item = Needed(data=form.supply.data, author=current_user)
+        db.session.add(item)
+        db.session.commit()
+        flash('Your item has been added!', 'success')
+        return redirect(url_for('supply.supplies'))
+    return render_template('create_supply.html', title='New Supply Item',
+                           form=form, legend='New Supply Item')
 
 
 @supply.route('/delete-supply', methods=['POST'])

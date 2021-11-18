@@ -24,18 +24,10 @@
       {% if needed.page == page_num %}
         <a class="btn btn-outline-info disabled mb-4" href="{{ url_for('supplies.supplies', page=page_num) }}">{{ page_num }}</a>
       {% else %}
-        <a class="btn btn-link mb-4" href="{{ url_for('needed.supplies', page=page_num) }}">{{ page_num }}</a>
+        <a class="btn btn-link mb-4" href="{{ url_for('supplies.supplies', page=page_num) }}">{{ page_num }}</a>
       {% endif %}
     {% else %}
       ..
     {% endif %}
   {% endfor %}
-  <br />
-<form method="POST">
-  <textarea name="supply" id="supply" class="form-control" spellcheck="true" maxlength="1000"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Idea</button>
-  </div>
-</form>
 {% endblock %}

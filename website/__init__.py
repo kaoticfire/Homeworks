@@ -25,14 +25,12 @@ def create_app(config_class=Config):
 
     from chores.routes import chores
     from ideas.routes import ideas
-    from main.routes import main
     from users.routes import users
     from supplies.routes import supply
     from errors.handlers import errors
 
     app.register_blueprint(chores, url_prefix='/')
     app.register_blueprint(ideas, url_prefix='/')
-    app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(users, url_prefix='/')
     app.register_blueprint(supply, url_prefix='/')
     app.register_blueprint(errors, url_prefix='/')

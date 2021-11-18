@@ -28,16 +28,12 @@ def chore_sorting(datab):
     results = db_connection(str(datab), sql_statement)
     shuffle(results, seed(time()))
     chore_count = 0
-    current_date = dt.now().strftime('%Y-%m-%d')
-    if Tasks.query.filter(Tasks.date < dt.strptime(current_date, '%Y-%m-%d')).all():
-        return None
-    else:
-        for iteration, row in enumerate(results):
-            if chore_count < (int(len(results) / 2)):
-                task = Tasks(task=row[0], user_id=3)
-            else:
-                task = Tasks(task=row[0], user_id=2)
-            chore_count += 1
-            db.session.add(task)
-        db.session.commit()
+    for iteration, row in enumerate(results):
+        if chore_count < (int(len(results) / 2)):
+            task = Tasks(task=row[0], user_id=3)
+        else:
+            task = Tasks(task=row[0], user_id=2)
+        chore_count += 1
+        db.session.add(task)
+    db.session.commit()
     return None
