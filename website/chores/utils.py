@@ -29,8 +29,8 @@ def chore_sorting(datab):
     shuffle(results, seed(time()))
     chore_count = 0
     current_date = dt.now().strftime('%Y-%m-%d')
-    entry_date = Tasks.query.filter_by(date=current_date)
-    if entry_date:
+    if Tasks.query.filter(Tasks.date >= dt.strftime(current_date, '%Y-%m-%d'),
+                          Tasks.date <= dt.strftime(current_date, '%Y-%m-%d')).all():
         pass
     else:
         for iteration, row in enumerate(results):
