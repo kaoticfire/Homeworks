@@ -13,7 +13,7 @@ users = Blueprint('users', __name__)
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('views.home'))
+        return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()

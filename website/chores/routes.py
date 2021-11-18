@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, jsonify
 from website.chores.utils import chore_sorting
 from website import db
+from website.models import Tasks
 from flask_login import current_user
 import json
 from pathlib import Path
@@ -10,17 +11,12 @@ chores = Blueprint('chores', __name__)
 
 @chores.route('/chore')
 def chore():
-    all_chores = []
-    database = str(Path(__file__).parent) + '/database.db'
-    chores_todo = chore_sorting(database)
-    if current_user.id == 2:
-        tasks = chores_todo[1]
-    elif current_user.id == 3:
-        tasks = chores_todo[0]
+    database = str(Path(__file__).parent) + '/../database.db'
+    chore_sorting(database)
+    if current_user.is_parent:
+        tasks = Tasks.query.filter_by(is_active=True)
     else:
-        all_chores.append(chores_todo[0])
-        all_chores.append(chores_todo[1])
-        tasks = all_chores
+        tasks = Tasks.query.filter_by(user_id=current_user.id, is_active=True)
     return render_template('chore.html', user=current_user, chores=tasks)
 
 

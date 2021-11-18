@@ -4,14 +4,19 @@
   {% for chore in chores %}
     {% if user.is_parent %}
         <li class="list-group-item">
-            {{ chore.data }}
-            <button type="button" class="close" onClick="deleteChore({{ chore.id }})">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <div class="article-metadata">
+              <a class="mr-1 ml-2" href="#">{{ chore.owner.first_name }}</a>
+                {% if chore.is_active %}
+                    -- Not Done
+                {% else %}
+                    -- Claimed done
+                {% endif %}
+            </div>
+            {{ chore.task }}
         </li>
     {% else %}
         <li class="list-group-item">
-            {{ chore.data }}
+            {{ chore.task }}
             <button type="button" class="close" onClick="deleteChore({{ chore.id }})">
                 <span aria-hidden="true">&times;</span>
             </button>
