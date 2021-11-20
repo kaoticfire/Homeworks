@@ -1,5 +1,5 @@
 from flask import Blueprint, request, flash, redirect, jsonify, url_for, render_template, current_app
-from website.models import Needed
+from website.models import Needed, Note
 from website.supplies.forms import SupplyForm
 from website import db, mail
 from flask_login import current_user, login_required
@@ -47,23 +47,29 @@ def delete_supply():
     supplys = Needed.query.get(supply_id)
     if supply:
         if supplys.user_id == current_user.id or current_user.is_parent:
-            supplys.is_active = False
+            db.session.delete(supplys)
             db.session.commit()
-
     return jsonify({})
 
 
 @supply.route('/supply_report')
 def export_list():
-    notes = Needed.query.filter(Needed.is_active).all()
+    items = Note.query.filter(Note.is_active).all()
+    needs = Needed.query.filter(Needed.is_active).all()
     flash('Exporting list now, please wait...', 'info')
-    msg = Message('---Dinner Ideas---', sender=current_app.config['MAIL_USERNAME'], recipients=[current_user.email])
+    msg = Message('--Shopping List--', sender=current_app.config['MAIL_USERNAME'],
+                  recipients=current_app.config['MAIL_RECIPIENT'])
     with open('ideas.txt', 'a') as file:
-        file.write('---Dinner Ideas---\n')
-        for note in notes:
-            file.write(str(note.data) + '\n')
-            msg.body = str(note.data) + '\n'
-            note.is_active = False
+        file.write('--Shopping List--\n\n')
+        for item in items:
+            file.write(str(item.data) + '\n')
+            msg.body = str(item.data) + '\n'
+            db.session.delete(item)
+            db.session.commit()
+        for need in needs:
+            file.write(str(need.data) + '\n')
+            msg.body = str(need.data) + '\n'
+            db.session.delete(need)
             db.session.commit()
     system(f'/usr/bin/lpr {file}')
     mail.send(msg)

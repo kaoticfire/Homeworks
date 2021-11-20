@@ -36,11 +36,12 @@
             <a class="nav-item nav-link" id="ideas" href="/">Ideas</a>
             <a class="nav-item nav-link" id="new_idea" href="/new_idea">New Idea</a>
             <a class="nav-item nav-link" id="new_supply" href="/new_supply">New Supply</a>
-            <a class="nav-item nav-link" id="chores" href="/chore">Chore</a>
+            <a class="nav-item nav-link" id="new_chores" href="/get-chores">New Chores</a>
+            <a class="nav-item nav-link" id="chores" href="/chore">Chores</a>
             <a class="nav-item nav-link" id="supplies" href="/supplies">Supplies</a>
               {% if current_user.is_parent %}
                 <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
-                <a class="nav-item nav-link" id="report_supply" href="/supply_report">Report Supplies</a>
+                <a class="nav-item nav-link" id="report_supply" href="/supply_report">Report</a>
               {% endif %}
             <a class="nav-item nav-link" id="account" href="/account">Account</a>
             <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>

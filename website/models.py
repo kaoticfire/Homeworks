@@ -3,6 +3,7 @@ from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from datetime import datetime as dt
 
 
 class Note(db.Model):
@@ -25,7 +26,7 @@ class Needed(db.Model):
 class Tasks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.Integer, db.ForeignKey('chore.id'))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    date = db.Column(db.DateTime(timezone=True), default=dt.today())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     is_active = db.Column(db.Boolean, default=True)
     is_approved = db.Column(db.Boolean, default=False)

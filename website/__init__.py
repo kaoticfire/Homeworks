@@ -35,10 +35,11 @@ def create_app(config_class=Config):
     app.register_blueprint(supply, url_prefix='/')
     app.register_blueprint(errors, url_prefix='/')
 
-    from .models import User, Note, Chore, Needed
+    from .models import User, Note, Chore, Needed, Tasks
 
     admin.add_views(MyView(User, db.session), MyView(Note, db.session),
-                    MyView(Chore, db.session), MyView(Needed, db.session))
+                    MyView(Chore, db.session), MyView(Needed, db.session),
+                    MyView(Tasks, db.session))
     create_database(app)
 
     @login_manager.user_loader

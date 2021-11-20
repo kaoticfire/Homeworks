@@ -6,10 +6,26 @@ function deleteNote(noteId) {
     window.location.href = "/";
   });
 }
-function deleteChore(choreId) {
+function deleteChore(taskId) {
   fetch("/delete-chore", {
     method: "POST",
-    body: JSON.stringify({ choreId: choreId }),
+    body: JSON.stringify({ taskId: taskId }),
+  }).then((_res) => {
+    window.location.href = "/chore";
+  });
+}
+function approveChore(choreId) {
+  fetch("/approve-chore", {
+    method: "POST",
+    body: JSON.stringify({ taskId: taskId }),
+  }).then((_res) => {
+    window.location.href = "/chore";
+  });
+}
+function rejectChore(choreId) {
+  fetch("/reject-chore", {
+    method: "POST",
+    body: JSON.stringify({ taskId: taskId }),
   }).then((_res) => {
     window.location.href = "/chore";
   });

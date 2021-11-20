@@ -1,24 +1,34 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
 <h1 align="center">Chore List</h1>
 <ul class="list-group list-group-flush" id="chores">
-  {% for chore in chores %}
+  {% for task in tasks %}
     {% if user.is_parent %}
         <li class="list-group-item">
             <div class="article-metadata">
-              <a class="mr-1 ml-2" href="#">{{ chore.owner.first_name }}</a>
-                {% if chore.is_active %}
-                    -- Not Done
+              <a class="mr-1 ml-2" href="#">{{ task.owner.first_name }}</a>
+                {% if task.is_approved %}
+                    -- Approved
                 {% else %}
-                    -- Claimed done
+                    {% if task.is_active %}
+                        -- Not Done
+                    {% else %}
+                        -- Claimed done
+                    {% endif %}
                 {% endif %}
+                <button type="button" class="close text-danger" onClick="rejectChore({{ task.id }})">
+                    <span aria-hidden="true">x</span>
+                </button>
             </div>
-            {{ chore.task }}
+                {{ task.task }}
+                <button type="button" class="close text-success" onClick="approveChore({{ task.id }})">
+                    <span aria-hidden="true">o</span>
+                </button>
         </li>
     {% else %}
         <li class="list-group-item">
-            {{ chore.task }}
-            <button type="button" class="close" onClick="deleteChore({{ chore.id }})">
-                <span aria-hidden="true">&times;</span>
+            {{ task.task }}
+            <button type="button" class="close text-secondary" onClick="deleteChore({{ task.id }})">
+                <span aria-hidden="true">x</span>
             </button>
         </li>
     {% endif %}

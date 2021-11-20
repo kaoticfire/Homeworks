@@ -16,3 +16,5 @@ class Config:
     # MAIL_USERNAME = getenv('MAIL_USER')
     MAIL_PASSWORD = 'Vzg6rtbYB880'
     # MAIL_PASSWORD = getenv('MAIL_PASSWORD')
+    MAIL_RECIPIENT = 'hoovers2009@gmail.com'
+    # MAIL_RECIPIENT = getenv('MAIL_RECIPIENT')
