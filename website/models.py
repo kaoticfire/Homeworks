@@ -29,7 +29,6 @@ class Tasks(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=dt.today())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     is_active = db.Column(db.Boolean, default=True)
-    is_approved = db.Column(db.Boolean, default=False)
 
 
 class Chore(db.Model):

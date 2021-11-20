@@ -6,28 +6,19 @@
         <li class="list-group-item">
             <div class="article-metadata">
               <a class="mr-1 ml-2" href="#">{{ task.owner.first_name }}</a>
-                {% if task.is_approved %}
-                    -- Approved
+              <small class="text-muted"> - {{ task.date.strftime('%Y-%m-%d') }}</small>
+                {% if task.is_active %}
+                    -- Not Completed
                 {% else %}
-                    {% if task.is_active %}
-                        -- Not Done
-                    {% else %}
-                        -- Claimed done
-                    {% endif %}
+                    -- Completed
                 {% endif %}
-                <button type="button" class="close text-danger" onClick="rejectChore({{ task.id }})">
-                    <span aria-hidden="true">x</span>
-                </button>
             </div>
-                {{ task.task }}
-                <button type="button" class="close text-success" onClick="approveChore({{ task.id }})">
-                    <span aria-hidden="true">o</span>
-                </button>
+            {{ task.task }}
         </li>
     {% else %}
         <li class="list-group-item">
             {{ task.task }}
-            <button type="button" class="close text-secondary" onClick="deleteChore({{ task.id }})">
+            <button type="button" class="close text-success" onClick="deleteChore({{ task.id }})">
                 <span aria-hidden="true">x</span>
             </button>
         </li>
