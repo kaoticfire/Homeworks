@@ -2,3 +2,7 @@
 venv
 .vscode
 .idea
+debug.log
+website/__pychace__/
+website/database.db
+website/static/pics
