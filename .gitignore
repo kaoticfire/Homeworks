@@ -3,6 +3,6 @@ venv
 .vscode
 .idea
 debug.log
-website/__pychace__/
+website/__pycache__/
 website/database.db
 website/static/pics
