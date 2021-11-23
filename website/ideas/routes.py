@@ -1,16 +1,17 @@
 from flask import Blueprint, request, flash, redirect, jsonify, url_for, render_template
 from website.models import Note, Needed
 from website.ideas.forms import IdeaForm
+from website.supplies.utils import IDEAS, get_ingredients
 from website import db
 from flask_login import current_user, login_required
-import json
+from json import loads
 
 ideas = Blueprint('ideas', __name__)
 
 
 @ideas.route('/delete-note', methods=['POST'])
 def delete_note():
-    note = json.loads(request.data)
+    note = loads(request.data)
     note_id = note['noteId']
     note = Note.query.get(note_id)
     if note:
@@ -31,8 +32,14 @@ def home():
             flash('Idea is too short', 'error')
         else:
             new_note = Note(data=note, user_id=current_user.id)
-            new_supply = Needed(data=note, user_id=current_user.id)
             db.session.add(new_note)
+            new_supply = ''
+            if note in IDEAS:
+                for item in IDEAS[note]:
+                    new_supply = Needed(data=item, user_id=current_user.id)
+            else:
+                for item in get_ingredients(request.form.get('recipe')):
+                    new_supply = Needed(data=item, user_id=current_user.id)
             db.session.add(new_supply)
             db.session.commit()
             flash('Idea added!', category='success')

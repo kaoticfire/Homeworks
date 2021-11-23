@@ -5,7 +5,7 @@ from website import db, mail
 from flask_login import current_user, login_required
 from flask_mail import Message
 from os import system
-import json
+from json import loads
 
 supply = Blueprint('supplies', __name__)
 
@@ -42,7 +42,7 @@ def new_idea():
 
 @supply.route('/delete-supply', methods=['POST'])
 def delete_supply():
-    supplys = json.loads(request.data)
+    supplys = loads(request.data)
     supply_id = supplys['supplyId']
     supplys = Needed.query.get(supply_id)
     if supply:
