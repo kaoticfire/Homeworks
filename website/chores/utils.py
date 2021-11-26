@@ -6,10 +6,12 @@ from time import time
 from website import db
 from website.models import Tasks
 
+# TODO: Find a way to sort and split the chores using FLASK_SQLALCHEMY instead
 
-def db_connection(db, query):
+
+def db_connection(datab, query):
     try:
-        _conn = connect(db)
+        _conn = connect(datab)
         with _conn:
             _query_cursor = _conn.cursor()
             _query_cursor.execute(query)
