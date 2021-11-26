@@ -1,10 +1,11 @@
 from flask import Blueprint, request, render_template, jsonify, redirect, url_for
 from website.chores.utils import chore_sorting
 from website import db
-from website.config import Config
 from website.models import Tasks
 from flask_login import current_user
 import json
+from pathlib import Path
+
 
 chores = Blueprint('chores', __name__)
 
@@ -32,6 +33,6 @@ def delete_task():
 
 @chores.route('/get-chores')
 def get_chores():
-    database = Config.DB_NAME
+    database = str(Path(__file__).parent.parent) + '/database.db'
     chore_sorting(database)
     return redirect(url_for('chores.chore'))

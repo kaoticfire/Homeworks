@@ -3,7 +3,7 @@ from os import getenv
 
 class Config:
     DB_NAME = 'database.db'
-    SECRET_KEY = getenv('SECRET_KEY')
+    SECRET_KEY = 'fdsajfhsdk;f jdskfj;a;j'
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     MAIL_SERVER = 'smtp.gmail.com'

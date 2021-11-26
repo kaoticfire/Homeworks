@@ -22,10 +22,10 @@ def db_connection(db, query):
 def chore_sorting(datab):
     current_day = dt.today().weekday()
     if current_day < 5:
-        sql_statement = "SELECT data FROM chore WHERE is_weekend = 0;"
+        sql_statement = "SELECT data FROM chore WHERE is_weekend IS FALSE;"
     else:
         sql_statement = "SELECT data FROM chore;"
-    results = db_connection(str(datab), sql_statement)
+    results = db_connection(datab, sql_statement)
     shuffle(results, seed(time()))
     chore_count = 0
     for iteration, row in enumerate(results):
