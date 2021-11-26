@@ -49,5 +49,5 @@ def create_app(config_class=Config):
 
 
 def create_database(app):
-    if not path.exists('website/' + Config.DB_NAME):
+    if not path.exists(Config.SQLALCHEMY_DATABASE_URI):
         db.create_all(app=app)
