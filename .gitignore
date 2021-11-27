@@ -6,3 +6,5 @@ debug.log
 website/__pycache__/
 website/database.db
 website/static/pics
+debug.log
+.dcignore

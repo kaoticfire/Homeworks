@@ -16,6 +16,8 @@ data_*/
 
 # Lilypond
 *~
+.*
+debug.log
 
 # Nim
 nimcache/
