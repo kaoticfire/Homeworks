@@ -1,7 +1,7 @@
-import json
+from json import load as jload
 
 with open('/etc/config.json') as config_file:
-    config = json.load(config_file)
+    config = jload(config_file)
 
 
 class Config:
