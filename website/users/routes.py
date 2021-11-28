@@ -107,7 +107,7 @@ def account():
     elif request.method == "GET":
         form.first_name.data = current_user.first_name
         form.email.data = current_user.email
-    img_file = url_for("static", filename="/" + current_user.img_file)
+    img_file = url_for("static", filename="pics/" + current_user.img_file)
     return render_template(
         "account.html", title="Account", image_file=img_file, form=form
     )
