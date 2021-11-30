@@ -1,11 +1,11 @@
-from unittest import TestProgram
+from unittest import TestSuite
 from tempfile import mkstemp
 from website import create_app, create_database
 from website.chores import chores_db_connection
 from os import close, unlink
 
 
-def test_create_app():
+def test_create_app(TestCase):
     """Create and configure a new app instance for each test."""
     # create a temporary file to isolate the database for each test
     db_fd, db_path = mkstemp()
