@@ -22,7 +22,13 @@ IDEAS = {'tacos': ['ground beef', 'lettuce', 'tortillas', 'taco shells', 'cheese
          }
 
 
-def get_ingredients(url):
+def get_ingredients(url: str) -> list:
+    """ This function scrapes the website provided for the ingedients of a particular dish.
+    
+    ;param: url: the website to scrape. At this time the scraping works only with
+    Allrecipes.com.
+    ;return: the list of ingredients.
+    """
     try:
         source = rget(url).text
         soup = BeautifulSoup(source, 'lxml')

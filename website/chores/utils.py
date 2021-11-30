@@ -3,13 +3,21 @@ from sqlite3 import connect
 from datetime import datetime as dt
 from traceback import print_exc
 from time import time
+
+from werkzeug.datastructures import FileStorage
 from website import db
 from website.models import Tasks
 
 # TODO: Find a way to sort and split the chores using FLASK_SQLALCHEMY instead
 
 
-def db_connection(datab, query):
+def _db_connection(datab: FileStorage, query: str) -> list:
+    """ Function to make sql connection to database.
+    
+    ;param: datab: The database to connect to, pulled from calling function.
+    ;param: query: The query to execute against the database.
+    ;return: list containing results.
+    """
     try:
         _conn = connect(datab)
         with _conn:
@@ -21,13 +29,21 @@ def db_connection(datab, query):
         print_exc()
 
 
-def chore_sorting(datab):
+def chore_sorting(database: FileStorage) -> None:
+    """ This function gets the results of the SQL query and randomly assigns
+    a user to a result item in the resulting list. Using a sql client 
+    connection as the flask-sqlalchemy does not seem to return a an
+    iterable.
+    
+    ;param: database: The application database containing a table of 
+    household chores.
+    """
     current_day = dt.today().weekday()
     if current_day < 5:
         sql_statement = "SELECT data FROM chore WHERE is_weekend IS FALSE;"
     else:
         sql_statement = "SELECT data FROM chore;"
-    results = db_connection(datab, sql_statement)
+    results = _db_connection(database, sql_statement)
     shuffle(results, seed(time()))
     chore_count = 0
     for iteration, row in enumerate(results):
