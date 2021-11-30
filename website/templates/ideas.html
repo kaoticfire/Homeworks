@@ -9,15 +9,6 @@
             <div class="article-metadata">
               <a class="mr-1 ml-2" href="#">{{ note.author.first_name }}</a>
               <small class="text-muted"> - {{ note.date.strftime('%Y-%m-%d') }}</small>
-<!--                <button class="btn" onClick="deleteNote({{ note.id }})">-->
-<!--                  <span aria-hidden="true" class="material-icons ng-star-inserted" style=""></span>-->
-<!--                </button>-->
-<!--                <button class="btn">-->
-<!--                  <span aria-hidden="true" class="material-icons ng-star-inserted" style=""></span>-->
-<!--                </button>-->
-<!--                <button class="btn">-->
-<!--                  <span aria-hidden="true" class="material-icons ng-star-inserted" style=""></span>-->
-<!--                </button>-->
               <button type="button" class="close" onClick="deleteNote({{ note.id }})">
                 <span aria-hidden="true">&times;</span>
               </button>
