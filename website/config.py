@@ -1,3 +1,4 @@
+""" Application configuration settings. """
 from json import load as jload
 from sys import platform
 
@@ -11,6 +12,7 @@ with open(file) as config_file:
 
 
 class Config:
+    """ Application Variables. """
     SECRET_KEY = config.get("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = config.get("SQLALCHEMY_DATABASE_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = True

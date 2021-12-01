@@ -1,22 +1,25 @@
+""" Helper functions for the chore routes and package. """
+
 from random import shuffle, seed
 from sqlite3 import connect
 from datetime import datetime as dt
 from traceback import print_exc
 from time import time
 
-from werkzeug.datastructures import FileStorage
 from website import db
 from website.models import Tasks
 
-# TODO: Find a way to sort and split the chores using FLASK_SQLALCHEMY instead
 
-
-def _db_connection(datab: FileStorage, query: str) -> list:
+def _db_connection(datab, query: str) -> list:
     """ Function to make sql connection to database.
     
-    ;param: datab: The database to connect to, pulled from calling function.
-    ;param: query: The query to execute against the database.
-    ;return: list containing results.
+    ARGS:
+        datab: The database to connect to, pulled from calling function.
+        query: The query to execute against the database.
+    Return:
+        List containing results.
+    Raises:
+        IOError / OSError: raises exception if cannot connect.
     """
     try:
         _conn = connect(datab)
@@ -29,14 +32,16 @@ def _db_connection(datab: FileStorage, query: str) -> list:
         print_exc()
 
 
-def chore_sorting(database: FileStorage) -> None:
+# TODO: Find a way to sort and split the chores using FLASK_SQLALCHEMY instead
+def chore_sorting(database: str) -> None:
     """ This function gets the results of the SQL query and randomly assigns
     a user to a result item in the resulting list. Using a sql client 
     connection as the flask-sqlalchemy does not seem to return a an
     iterable.
     
-    ;param: database: The application database containing a table of 
-    household chores.
+    Args:
+        database: The application database containing a table of
+        household chores.
     """
     current_day = dt.today().weekday()
     if current_day < 5:

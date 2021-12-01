@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from requests import HTTPError, get as rget
 
-
 IDEAS = {'tacos': ['ground beef', 'lettuce', 'tortillas', 'taco shells', 'cheese', 'tomatoes', 'taco seasoning'],
          'meatloaf': ['ground beef', ],
          'burgers': ['ground beef or hamburger patties', 'lettuce', 'cheese', 'tomatoes', 'fries', 'condiments'],
@@ -23,11 +22,15 @@ IDEAS = {'tacos': ['ground beef', 'lettuce', 'tortillas', 'taco shells', 'cheese
 
 
 def get_ingredients(url: str) -> list:
-    """ This function scrapes the website provided for the ingedients of a particular dish.
-    
-    ;param: url: the website to scrape. At this time the scraping works only with
-    Allrecipes.com.
-    ;return: the list of ingredients.
+    """ This function scrapes the website provided for the ingredients of a particular dish.
+
+    Args:
+        url: the website to scrape. At this time the scraping works only with
+        Allrecipes.com.
+    Return:
+        The list of ingredients.
+    Raises:
+         HTTPError: raises exception if trouble connecting to webpage or cannot find html elemnets.
     """
     try:
         source = rget(url).text
@@ -38,5 +41,5 @@ def get_ingredients(url: str) -> list:
             ingredients.append(ingredient)
     except HTTPError as exception:
         print(exception)
-        return None
+        return []
     return ingredients

@@ -1,3 +1,5 @@
+""" All routes related to chores and chore assignment. """
+
 from flask import Blueprint, request, render_template, jsonify, redirect, url_for
 from website.chores.utils import chore_sorting
 from website import db
@@ -11,7 +13,8 @@ chores = Blueprint('chores', __name__)
 
 
 @chores.route('/chore')
-def chore():
+def chore() -> str:
+    """ The route to display the chores assigned. """
     if current_user.is_parent:
         tasks = Tasks.query.filter_by(is_active=True)
     else:
@@ -21,6 +24,7 @@ def chore():
 
 @chores.route('/delete-chore', methods=['POST'])
 def delete_task():
+    """ Marking a chore completed. """
     task = json.loads(request.data)
     task_id = task['taskId']
     task = Tasks.query.get(task_id)
@@ -33,6 +37,7 @@ def delete_task():
 
 @chores.route('/get-chores')
 def get_chores():
+    """ Obtain a new set of chores for the day, only accessible from the admin menu. """
     database = str(Path(__file__).parent.parent) + '/database.db'
     chore_sorting(database)
     return redirect(url_for('chores.chore'))
