@@ -5,6 +5,7 @@ from website.chores.utils import chore_sorting
 from website import db
 from website.models import Tasks
 from flask_login import current_user
+from datetime import timedelta, datetime as dt
 import json
 from pathlib import Path
 
@@ -16,7 +17,7 @@ chores = Blueprint('chores', __name__)
 def chore() -> str:
     """ The route to display the chores assigned. """
     if current_user.is_parent:
-        tasks = Tasks.query.filter_by(is_active=True)
+        tasks = Tasks.query.filter(Tasks.date >= (dt.today() + timedelta(days=-1))).all()
     else:
         tasks = Tasks.query.filter_by(user_id=current_user.id, is_active=True)
     return render_template('chore.html', user=current_user, tasks=tasks)
