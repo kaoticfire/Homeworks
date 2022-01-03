@@ -14,7 +14,7 @@ function deleteChore(taskId) {
     window.location.href = "/chore";
   });
 }
-function approveChore(choreId) {
+function approve(taskId) {
   fetch("/approve-chore", {
     method: "POST",
     body: JSON.stringify({ taskId: taskId }),
@@ -22,17 +22,7 @@ function approveChore(choreId) {
     window.location.href = "/chore";
   });
 }
-function rejectChore(choreId) {
-  fetch("/reject-chore", {
-    method: "POST",
-    body: JSON.stringify({ taskId: taskId }),
-  }).then((_res) => {
-    window.location.href = "/chore";
-  });
-}
-window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0)
-}, 4000);
+
 function deleteSupply(supplyId) {
   fetch("/delete-supply", {
     method: "POST",

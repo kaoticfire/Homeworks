@@ -1,4 +1,3 @@
-""" The basic settings of the application. """
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
@@ -24,11 +23,11 @@ def create_app(config_class=Config):
     mail.init_app(app)
     login_manager.init_app(app)
 
-    from chores.routes import chores
-    from ideas.routes import ideas
-    from users.routes import users
-    from supplies.routes import supply
-    from errors.handlers import errors
+    from website.chores.routes import chores
+    from website.ideas.routes import ideas
+    from website.users.routes import users
+    from website.supplies.routes import supply
+    from website.errors.handlers import errors
 
     app.register_blueprint(chores, url_prefix='/')
     app.register_blueprint(ideas, url_prefix='/')

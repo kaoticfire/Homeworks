@@ -1,5 +1,3 @@
-""" All routes related to dinner ideas. """
-
 from flask import Blueprint, request, flash, redirect, jsonify, url_for, render_template
 from website.models import Note, Needed
 from website.ideas.forms import IdeaForm
@@ -13,7 +11,6 @@ ideas = Blueprint('ideas', __name__)
 
 @ideas.route('/delete-note', methods=['POST'])
 def delete_note():
-    """ Gets current id of the idea in question and remove entry from the database. """
     note = loads(request.data)
     note_id = note['noteId']
     note = Note.query.get(note_id)
@@ -27,7 +24,6 @@ def delete_note():
 @ideas.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    """ The defaul landing page upon authentication success. """
     page = request.args.get('page', 1, type=int)
     notes = Note.query.paginate(page=page, per_page=5)
     if request.method == 'POST':
@@ -53,7 +49,6 @@ def home():
 @ideas.route("/new_idea", methods=['GET', 'POST'])
 @login_required
 def new_idea():
-    """ Display the custom new idea form on a webpage. """
     form = IdeaForm()
     if form.validate_on_submit():
         note = Note(data=form.title.data, url=form.recipe.data, author=current_user)

@@ -1,5 +1,3 @@
-""" All routes contained in the user module. """
-
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from website.models import User
 from website.users.forms import (
@@ -20,7 +18,6 @@ users = Blueprint("users", __name__)
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
-    """ The authentication process required to enter the site. """
     if current_user.is_authenticated:
         return redirect(url_for("ideas.home"))
     form = LoginForm()
@@ -38,14 +35,12 @@ def login():
 @users.route("/logout")
 @login_required
 def logout():
-    """ Leave the site. """
     logout_user()
     return redirect(url_for("users.login"))
 
 
 @users.route("/sign_up", methods=["GET", "POST"])
 def sign_up():
-    """ The creation of a new user account. """
     if current_user.is_authenticated:
         return redirect(url_for("ideas.home"))
     form = RegistrationForm()
@@ -66,7 +61,6 @@ def sign_up():
 
 @users.route("/reset_password", methods=["GET", "POST"])
 def reset_request():
-    """ Request a security token to reset the forgotten password. """
     if current_user.is_authenticated:
         return redirect(url_for("ideas.home"))
     form = RequestResetForm()
@@ -82,7 +76,6 @@ def reset_request():
 
 @users.route("/reset_password/<token>", methods=["GET", "POST"])
 def reset_token(token):
-    """ Once a user has a valid security token the user is take to this page to reset their password. """
     if current_user.is_authenticated:
         return redirect(url_for("ideas.home"))
     user = User.verify_reset_token(token)
@@ -101,7 +94,6 @@ def reset_token(token):
 @users.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
-    """ a page for the user to update thier account email, profile picture, and first name. """
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:

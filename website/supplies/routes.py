@@ -1,4 +1,3 @@
-""" All routes pertaining to the supply package. """
 from flask import Blueprint, request, flash, redirect, jsonify, url_for, render_template, current_app
 from website.models import Needed, Note
 from website.supplies.forms import SupplyForm
@@ -14,7 +13,6 @@ supply = Blueprint('supplies', __name__)
 @supply.route('/supplies', methods=['GET', 'POST'])
 @login_required
 def supplies():
-    """ List and display active supplies needed. """
     page = request.args.get('page', 1, type=int)
     needed = Needed.query.paginate(page=page, per_page=10)
     if request.method == 'POST':
@@ -30,22 +28,20 @@ def supplies():
 
 
 @supply.route("/new_supply", methods=['GET', 'POST'])
-def new_idea():
-    """ Custom form to add a new supply needed. """
+def new_supply():
     form = SupplyForm()
     if form.validate_on_submit():
         item = Needed(data=form.supply.data, author=current_user)
         db.session.add(item)
         db.session.commit()
         flash('Your item has been added!', 'success')
-        return redirect(url_for('supply.supplies'))
+        return redirect(url_for('supplies.supplies'))
     return render_template('create_supply.html', title='New Supply Item',
                            form=form, legend='New Supply Item')
 
 
 @supply.route('/delete-supply', methods=['POST'])
 def delete_supply():
-    """ Gets the id of the current supply need and removes from database. """
     supplys = loads(request.data)
     supply_id = supplys['supplyId']
     supplys = Needed.query.get(supply_id)
@@ -58,7 +54,6 @@ def delete_supply():
 
 @supply.route('/supply_report')
 def export_list():
-    """ Take supply need list and write to file for printing as well as attempt to send an email pertaining to. """
     items = Note.query.filter(Note.is_active).all()
     needs = Needed.query.filter(Needed.is_active).all()
     flash('Exporting list now, please wait...', 'info')

@@ -3,6 +3,16 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/website" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/chores" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/errors" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/ideas" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/static" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/static/pics" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/supplies" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/templates" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/templates/admin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/templates/errors" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/users" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludePattern pattern="database.db" />

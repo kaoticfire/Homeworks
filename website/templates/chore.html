@@ -1,28 +1,29 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %} - Chores{% endblock %} {% block content %}
 <h1 align="center">Chore List</h1>
-<ul class="list-group list-group-flush" id="chores">
-  {% for task in tasks %}
-    {% if user.is_parent %}
-        <li class="list-group-item">
-            <div class="article-metadata">
-              <a class="mr-1 ml-2" href="#">{{ task.owner.first_name }}</a>
-              <small class="text-muted"> - {{ task.date.strftime('%Y-%m-%d') }}</small>
-                {% if task.is_active %}
-                    -- Not Completed
-                {% else %}
-                    -- Claimed to be done
-                {% endif %}
-            </div>
-            {{ task.task }}
-        </li>
-    {% else %}
-        <li class="list-group-item">
-            {{ task.task }}
-            <button type="button" class="close text-success" onClick="deleteChore({{ task.id }})">
+{% for task in tasks %}
+{% if user.is_parent %}
+<article class="media content-section">
+    <img class="rounded-circle article-img img-fluid"
+         src="{{ url_for('static', filename='pics/' + task.owner.img_file) }}">
+    <!--Maybe add picture of dinner idea.-->
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-1 ml-2" href="#">{{ task.owner.first_name }}</a>
+            <small class="text-muted"> - {{ task.date.strftime('%Y-%m-%d') }}</small>
+            <button class="close text-success" onClick="deleteChore({{ task.id }})" type="button">
                 <span aria-hidden="true">x</span>
             </button>
-        </li>
-    {% endif %}
+            {% if task.is_active %}
+            -- {{ task.date.strftime('%Y-%m-%d') }} -- Not Completed
+            {% else %}
+            -- {{ task.date.strftime('%Y-%m-%d') }} -- Claimed to be done
+            {% endif %}
+        </div>
+        <div>
+            <p class="article-content ml-2">{{ task.task }}</p>
+        </div>
+    </div>
+</article>
+{% endif %}
 {% endfor %}
-</ul>
 {% endblock %}
