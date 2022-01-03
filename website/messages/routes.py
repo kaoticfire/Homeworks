@@ -9,7 +9,7 @@ messages = Blueprint('messages', __name__)
 
 @messages.route('/message', methods=['GET', 'POST'])
 @login_required
-def messages():
+def message():
     msgs = Message.query.all()
     return render_template('messages.html', user=current_user, messages=msgs, )
 
@@ -23,6 +23,6 @@ def new_message():
         db.session.add(msg)
         db.session.commit()
         flash('Your message has been sent!', 'success')
-        return redirect(url_for('messages.messages'))
+        return redirect(url_for('messages.message'))
     return render_template('create_msg.html', title='New Message',
                            form=form, legend='New Message')

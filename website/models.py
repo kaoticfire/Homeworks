@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from sqlalchemy.sql import func
 
-from . import db
+from website import db
 
 
 class Note(db.Model):
@@ -42,7 +42,7 @@ class Chore(db.Model):
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     recipient = db.Column(db.Integer, db.ForeignKey("user.id"))
-    sender = db.Column(db.Integer, db.ForeignKey("user.id"))
+    sender = db.Column(db.String(150), unique=True, nullable=False)
     message = db.Column(db.Text, nullable=False)
 
 
@@ -56,8 +56,7 @@ class User(db.Model, UserMixin):
     needed = db.relationship("Needed", backref="author", lazy=True)
     notes = db.relationship("Note", backref="author", lazy=True)
     chores = db.relationship("Tasks", backref="owner", lazy=True)
-    msg_sndr = db.relationship("Messages", backref="author", lazy=True)
-    msg_rcvr = db.relationship("Messages", backref="receiver", lazy=True)
+    msgs = db.relationship("Message", backref="msgs", lazy=True)
     is_parent = db.Column(db.Boolean, default=False)
 
     def get_reset_token(self, expires_sec=600):

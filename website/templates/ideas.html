@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block title %} - Dinner Ideas{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% block title %} - Dinner Ideas{% endblock %}
+{% block content %}
 <h1 align="center">Dinner Ideas</h1>
   {% for note in notes.items %}
     {% if note.is_active %}

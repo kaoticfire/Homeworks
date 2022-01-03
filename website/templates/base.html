@@ -43,12 +43,12 @@
               {% if current_user.is_parent %}
                 <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
                 <a class="nav-item nav-link" id="report_supply" href="/supply_report">Report</a>
+            <a class="nav-item nav-link" id="signUp" href="/sign_up">Invite User</a>
               {% endif %}
             <a class="nav-item nav-link" id="account" href="/account">Account</a>
             <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
             <a class="nav-item nav-link" id="login" href="/login">Login</a>
-            <!--a class="nav-item nav-link" id="signUp" href="/sign_up">Sign Up</a-->
           {% endif %}
         </div>
       </div>

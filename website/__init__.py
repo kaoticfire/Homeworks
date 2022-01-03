@@ -43,6 +43,8 @@ def create_app(config_class=Config):
                     MyView(Chore, db.session), MyView(Needed, db.session),
                     MyView(Tasks, db.session), MyView(Message, db.session))
     create_database(app)
+    with app.app_context():
+        db.create_all()
 
     @login_manager.user_loader
     def load_user(user_id):

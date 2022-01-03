@@ -40,9 +40,8 @@ def logout():
 
 
 @users.route("/sign_up", methods=["GET", "POST"])
+@login_required
 def sign_up():
-    if current_user.is_authenticated:
-        return redirect(url_for("ideas.home"))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(

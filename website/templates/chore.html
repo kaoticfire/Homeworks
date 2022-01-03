@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block title %} - Chores{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% block title %} - Chores{% endblock %}
+{% block content %}
 <h1 align="center">Chore List</h1>
     {% for task in tasks.items %}
         {% if user.is_parent %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} - Dinner Ideas{% endblock %}
+{% block title %} - Mailroom{% endblock %}
 {% block content %}
 <div class="content-section">
     <form method="POST" action="">
@@ -7,30 +7,29 @@
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ legend }}</legend>
             <div class="form-group">
-                {{ form.title.label(class="form-control-label") }}
-                {% if form.title.errors %}
-                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                {{ form.recipient.label(class="form-control-label") }}
+                {% if form.recipient.errors %}
+                    {{ form.titrecipientle(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.title.errors %}
+                        {% for error in form.recipient.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.title(class="form-control form-control-lg") }}
+                    {{ form.recipient(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            <small>Try <a href="https://www.allrecipes.com/">AllRecipies.com</a> for a good recipe.</small>
             <div class="form-group">
-                {{ form.recipe.label(class="form-control-label") }}
-                {% if form.recipe.errors %}
-                    {{ form.recipe(class="form-control form-control-lg is-invalid") }}
+                {{ form.message.label(class="form-control-label") }}
+                {% if form.message.errors %}
+                    {{ form.message(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.recipe.errors %}
+                        {% for error in form.message.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.recipe(class="form-control form-control-lg") }}
+                    {{ form.message(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
         </fieldset>
