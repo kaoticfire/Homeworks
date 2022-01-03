@@ -39,6 +39,13 @@ class Chore(db.Model):
     chores = db.relationship("Tasks")
 
 
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    recipient = db.Column(db.Integer, db.ForeignKey("user.id"))
+    sender = db.Column(db.Integer, db.ForeignKey("user.id"))
+    message = db.Column(db.Text, nullable=False)
+
+
 # noinspection PyBroadException
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,6 +56,8 @@ class User(db.Model, UserMixin):
     needed = db.relationship("Needed", backref="author", lazy=True)
     notes = db.relationship("Note", backref="author", lazy=True)
     chores = db.relationship("Tasks", backref="owner", lazy=True)
+    msg_sndr = db.relationship("Messages", backref="author", lazy=True)
+    msg_rcvr = db.relationship("Messages", backref="receiver", lazy=True)
     is_parent = db.Column(db.Boolean, default=False)
 
     def get_reset_token(self, expires_sec=600):

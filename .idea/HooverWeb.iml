@@ -13,6 +13,7 @@
       <sourceFolder url="file://$MODULE_DIR$/website/templates/admin" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/website/templates/errors" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/website/users" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/website/messages" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludePattern pattern="database.db" />

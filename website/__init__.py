@@ -28,18 +28,20 @@ def create_app(config_class=Config):
     from website.users.routes import users
     from website.supplies.routes import supply
     from website.errors.handlers import errors
+    from website.messages.routes import messages
 
     app.register_blueprint(chores, url_prefix='/')
     app.register_blueprint(ideas, url_prefix='/')
     app.register_blueprint(users, url_prefix='/')
     app.register_blueprint(supply, url_prefix='/')
     app.register_blueprint(errors, url_prefix='/')
+    app.register_blueprint(messages, url_prefix='/')
 
-    from .models import User, Note, Chore, Needed, Tasks
+    from .models import User, Note, Chore, Needed, Tasks, Message
 
     admin.add_views(MyView(User, db.session), MyView(Note, db.session),
                     MyView(Chore, db.session), MyView(Needed, db.session),
-                    MyView(Tasks, db.session))
+                    MyView(Tasks, db.session), MyView(Message, db.session))
     create_database(app)
 
     @login_manager.user_loader

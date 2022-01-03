@@ -1,29 +1,40 @@
 {% extends "base.html" %} {% block title %} - Chores{% endblock %} {% block content %}
 <h1 align="center">Chore List</h1>
-{% for task in tasks %}
-{% if user.is_parent %}
-<article class="media content-section">
-    <img class="rounded-circle article-img img-fluid"
-         src="{{ url_for('static', filename='pics/' + task.owner.img_file) }}">
-    <!--Maybe add picture of dinner idea.-->
-    <div class="media-body">
-        <div class="article-metadata">
-            <a class="mr-1 ml-2" href="#">{{ task.owner.first_name }}</a>
-            <small class="text-muted"> - {{ task.date.strftime('%Y-%m-%d') }}</small>
-            <button class="close text-success" onClick="deleteChore({{ task.id }})" type="button">
-                <span aria-hidden="true">x</span>
-            </button>
-            {% if task.is_active %}
-            -- {{ task.date.strftime('%Y-%m-%d') }} -- Not Completed
+    {% for task in tasks.items %}
+        {% if user.is_parent %}
+            <article class="media content-section">
+                <img class="rounded-circle article-img img-fluid"
+                     src="{{ url_for('static', filename='pics/' + task.owner.img_file) }}">
+                <!--Maybe add picture of dinner idea.-->
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-1 ml-2" href="#">{{ task.owner.first_name }}</a>
+                        <small class="text-muted"> - {{ task.date.strftime('%Y-%m-%d') }}</small>
+                        <button class="close text-success" onClick="deleteChore({{ task.id }})" type="button">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        {% if task.is_active %}
+                        -- {{ task.date.strftime('%Y-%m-%d') }} -- Not Completed
+                        {% else %}
+                        -- {{ task.date.strftime('%Y-%m-%d') }} -- Claimed to be done
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="article-content ml-2">{{ task.task }}</p>
+                    </div>
+                </div>
+            </article>
+        {% endif %}
+    {% endfor %}
+    {% for page_num in tasks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if tasks.page == page_num %}
+                <a class="btn btn-outline-info disabled mb-4" href="{{ url_for('chores.chore', page=page_num) }}">{{ page_num }}</a>
             {% else %}
-            -- {{ task.date.strftime('%Y-%m-%d') }} -- Claimed to be done
+                <a class="btn btn-link mb-4" href="{{ url_for('chores.chore', page=page_num) }}">{{ page_num }}</a>
             {% endif %}
-        </div>
-        <div>
-            <p class="article-content ml-2">{{ task.task }}</p>
-        </div>
-    </div>
-</article>
-{% endif %}
-{% endfor %}
+        {% else %}
+            ..
+        {% endif %}
+    {% endfor %}
 {% endblock %}
