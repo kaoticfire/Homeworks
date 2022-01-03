@@ -1,3 +1,5 @@
+""" Main configuration of the application """
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
@@ -16,6 +18,7 @@ mail = Mail()
 
 
 def create_app(config_class=Config):
+    """ create, configure, and start application """
     app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
@@ -48,10 +51,12 @@ def create_app(config_class=Config):
 
     @login_manager.user_loader
     def load_user(user_id):
+        """ look for user id for startup / login """
         return User.query.get(int(user_id))
     return app
 
 
 def create_database(app):
+    """ Create the database as needed """
     if not path.exists(Config.SQLALCHEMY_DATABASE_URI):
         db.create_all(app=app)
