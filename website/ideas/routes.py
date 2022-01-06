@@ -33,14 +33,6 @@ def home():
         else:
             new_note = Note(data=note, user_id=current_user.id)
             db.session.add(new_note)
-            new_supply = ''
-            if note in IDEAS:
-                for item in IDEAS[note]:
-                    new_supply = Needed(data=item, user_id=current_user.id)
-            else:
-                for item in get_ingredients(request.form.get('recipe')):
-                    new_supply = Needed(data=item, user_id=current_user.id)
-            db.session.add(new_supply)
             db.session.commit()
             flash('Idea added!', category='success')
     return render_template('ideas.html', user=current_user, notes=notes, )

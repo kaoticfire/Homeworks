@@ -11,11 +11,10 @@ chores = Blueprint('chores', __name__)
 
 @chores.route('/chore')
 def chore():
-    page = request.args.get('page', 1, type=int)
     if current_user.is_parent:
-        tasks = Tasks.query.filter_by(is_approved=False).paginate(page=page, per_page=10)
+        tasks = Tasks.query.filter_by(is_approved=False)
     else:
-        tasks = Tasks.query.filter_by(user_id=current_user.id, is_active=True).paginate(page=page, per_page=10)
+        tasks = Tasks.query.filter_by(user_id=current_user.id, is_active=True)
     return render_template('chore.html', user=current_user, tasks=tasks)
 
 

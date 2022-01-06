@@ -1,2 +1,40 @@
-{% extends "base.html" %} {% block title %} - Mailroom{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% block title %} - Messages{% endblock %}
+{% block content %}
+<h1 align="center">Messages</h1>
+  {% for item in messages %}
+    {% if item.sender == user %}
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-1 ml-2" href="#">{{ item.sender }}</a>  to {{ item.receiver.first_name }} on
+            <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
+          </div>
+          <p class="mr-1 ml-2">{{ item.message }}</p>
+        </div>
+      </article>
+    {% endif %}
+    {% if item.receiver.first_name == user %}
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-1 ml-2" href="#">{{ item.sender }}</a>  to {{ item.receiver.first_name }} on
+            <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
+          </div>
+          <p class="mr-1 ml-2">{{ item.message }}</p>
+        </div>
+      </article>
+    {% endif %}
+    {% if item.receiver.first_name == 'All' %}
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-1 ml-2" href="#">{{ item.sender }}</a>  to {{ item.receiver.first_name }} on
+            <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
+          </div>
+          <p class="mr-1 ml-2">{{ item.message }}</p>
+        </div>
+      </article>
+    {% endif %}
+  {% endfor %}
 {% endblock %}
