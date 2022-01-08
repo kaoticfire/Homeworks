@@ -14,15 +14,6 @@ function deleteChore(taskId) {
     window.location.href = "/chore";
   });
 }
-function approve(taskId) {
-  fetch("/approve-chore", {
-    method: "POST",
-    body: JSON.stringify({ taskId: taskId }),
-  }).then((_res) => {
-    window.location.href = "/chore";
-  });
-}
-
 function deleteSupply(supplyId) {
   fetch("/delete-supply", {
     method: "POST",

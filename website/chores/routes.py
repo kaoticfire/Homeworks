@@ -24,8 +24,11 @@ def delete_task():
     task_id = task['taskId']
     task = Tasks.query.get(task_id)
     if task:
-        if task.user_id == current_user.id or current_user.is_parent:
+        if task.user_id == current_user.id:
             task.is_active = False
+            db.session.commit()
+        elif current_user.is_parent and not task.is_active:
+            task.is_approved = True
             db.session.commit()
     return jsonify({})
 
@@ -35,16 +38,3 @@ def get_chores():
     database = str(Path(__file__).parent.parent) + '/database.db'
     chore_sorting(database)
     return redirect(url_for('chores.chore'))
-
-
-@chores.route('/approve-chore', methods=['POST'])
-def approve_chore():
-    # task = json.loads(request.data)
-    task = request.form.get('approve')
-    # task_id = task['taskId']
-    task = Tasks.query.get(task)
-    if task:
-        if current_user.is_parent:
-            task.is_approved = True
-            db.session.commit()
-    return jsonify({})

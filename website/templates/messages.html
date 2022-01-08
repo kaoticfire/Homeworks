@@ -13,8 +13,7 @@
           <p class="mr-1 ml-2">{{ item.message }}</p>
         </div>
       </article>
-    {% endif %}
-    {% if item.receiver.first_name == user %}
+    {% elif item.receiver.first_name == user %}
       <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
@@ -24,8 +23,7 @@
           <p class="mr-1 ml-2">{{ item.message }}</p>
         </div>
       </article>
-    {% endif %}
-    {% if item.receiver.first_name == 'All' %}
+    {% else %}
       <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
