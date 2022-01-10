@@ -20,7 +20,11 @@
     <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>{% block title %}Homeworks{% endblock %}</title>
+    {% if title %}
+        <title>Homeworks - {{ title }}</title>
+    {% else %}
+        <title>Homeworks</title>
+    {% endif %}
   </head>
   <body>
       <header class="site-header">
@@ -78,6 +82,9 @@
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
     <div class="container">{% block content %} {% endblock %}</div>
+    <footer class="container">
+        <small>Hoover Technologies &copy; 2021</small>
+    </footer>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -93,7 +100,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='index.js') }}"

@@ -23,7 +23,7 @@
           <p class="mr-1 ml-2">{{ item.message }}</p>
         </div>
       </article>
-    {% else %}
+    {% elif item.receiver.first_name == 'All' %}
       <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">

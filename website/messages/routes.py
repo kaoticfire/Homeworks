@@ -11,7 +11,7 @@ messages = Blueprint('messages', __name__)
 @login_required
 def message():
     msgs = Message.query.all()
-    return render_template('messages.html', user=current_user.first_name, messages=msgs, )
+    return render_template('messages.html', title='Messages', user=current_user.first_name, messages=msgs, )
 
 
 @messages.route("/new_message", methods=['GET', 'POST'])
