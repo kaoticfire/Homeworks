@@ -8,6 +8,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
+.navbar-brand {
+    font-family: 'Satisfy', cursive;
+}
+
 .bg-steel {
   background-color: #151b1e;
 }
@@ -61,4 +65,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .account-heading {
   font-size: 2.5rem;
+}
+
+.nav_log {
+  color: white;
 }
