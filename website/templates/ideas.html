@@ -2,6 +2,7 @@
 {% block title %} - Dinner Ideas{% endblock %}
 {% block content %}
 <h1 align="center">Dinner Ideas</h1>
+  <big><a class="nav-item nav-link btn btn-dark btn-lg mb-2" href="/new_idea" id="new_idea" role="button">New Idea</a></big>
   {% for note in notes.items %}
     {% if note.is_active %}
         <article class="media content-section">

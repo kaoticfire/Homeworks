@@ -2,6 +2,7 @@
 {% block title %} - Messages{% endblock %}
 {% block content %}
 <h1 align="center">Messages</h1>
+  <a class="nav-item nav-link btn btn-dark btn-lg mb-2" href="/new_message" id="new_message" role="button">New Message</a>
   {% for item in messages %}
     {% if item.sender == user %}
       <article class="media content-section">

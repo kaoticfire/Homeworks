@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block title %} - Shopping{% endblock %} {% block content %}
 <h1 align="center">Supplies Needed</h1>
+  <a class="nav-item nav-link btn btn-dark btn-lg mb-2" href="/new_supply" id="new_supply" role="button">New Supply</a>
   {% for item in needed.items %}
     {% if item.is_active %}
         <article class="media content-section">

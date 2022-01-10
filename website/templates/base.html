@@ -36,30 +36,27 @@
                       <span class="navbar-toggler-icon"></span>
                   </button>
                   {% if current_user.is_authenticated %}
-                  <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="collapse navbar-collapse" id="navbarToggle">
                       <div class="navbar-nav mr-auto">
-                          <a class="nav-item nav-link" href="/" id="ideas">Ideas</a>
-                          <a class="nav-item nav-link" href="/new_idea" id="new_idea">New Idea</a>
-                          <a class="nav-item nav-link" href="/new_supply" id="new_supply">New Supply</a>
-                          <a class="nav-item nav-link" href="/new_message" id="new_message">New Message</a>
-                          <a class="nav-item nav-link" href="/chore" id="chores">Chores</a>
-                          <a class="nav-item nav-link" href="/supplies" id="supplies">Supplies</a>
-                          <a class="nav-item nav-link" href="/message" id="message">Messages</a>
-                          {% if current_user.is_parent %}
-                          <a class="nav-item nav-link" href="/admin" id="admin">Admin</a>
-                          <a class="nav-item nav-link" href="/supply_report" id="report_supply">Report</a>
-                          <a class="nav-item nav-link" href="/sign_up" id="signUp">Invite User</a>
-                          <a class="nav-item nav-link" href="/account" id="account">Account</a>
-                          {% endif %}
+                        <a class="nav-item nav-link" href="/account" id="account">Account</a>
+                        <a class="nav-item nav-link" href="/chore" id="chores">Chores</a>
+                        <a class="nav-item nav-link" href="/" id="ideas">Dinner</a>
+                        <a class="nav-item nav-link" href="/message" id="message">Messages</a>
+                        <a class="nav-item nav-link" href="/supplies" id="supplies">Supplies</a>
+                        <a class="nav-item nav-link" href="/supply_report" id="report_supply">Report</a>
                       </div>
-                  </div>
-                  <!-- Navbar Right Side -->
-                  <div class="navbar-nav">
-                      <a class="nav-item nav-link" href="/logout" id="logout">Logout</a>
+                      <!-- Navbar Right Side -->
+                      <div class="navbar-nav">
+                        {% if current_user.is_parent %}
+                          <a class="nav-item nav-link" href="/admin" id="admin">Admin</a>
+                          <a class="nav-item nav-link" href="/sign_up" id="signUp">Invite User</a>
+                        {% endif %}
+                        <a class="nav-item nav-link" href="/logout" id="logout">Logout</a>
                       {% else %}
-                      <a class="nav-item nav-link nav_log" href="/login" id="login">Login</a>
+                        <a class="nav-item nav-link nav_log" href="/login" id="login">Login</a>
                       {% endif %}
-                  </div>
+                      </div>
+                    </div>
               </div>
           </nav>
       </header>
