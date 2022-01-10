@@ -10,6 +10,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-brand {
     font-family: 'Satisfy', cursive;
+    color: #cbd5db
 }
 
 .bg-steel {
@@ -68,5 +69,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav_log {
-  color: white;
+  color: #cbd5db;
 }
