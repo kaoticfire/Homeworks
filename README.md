@@ -14,3 +14,11 @@ Want to change the seperate SQL query for sorting the chores using the Flask-SQL
 
 Written: November 10th, 2021  
 Version: 1.3.5  
+
+## GUI Layout
+
+![Screenshot from 2022-01-11 01-35-07](https://user-images.githubusercontent.com/6629526/148908528-58c697fa-662e-4a6c-b0c2-428f22641d82.png)  
+
+![Screenshot from 2022-01-11 01-31-59](https://user-images.githubusercontent.com/6629526/148908455-a088e215-8f15-4494-8f1b-60d48d841542.png)  
+
+![Screenshot from 2022-01-11 01-34-36](https://user-images.githubusercontent.com/6629526/148908362-4ebe28a2-ec50-4846-91ff-599169718df0.png)
