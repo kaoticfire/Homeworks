@@ -61,7 +61,7 @@ def sign_up():
 @users.route("/reset_password", methods=["GET", "POST"])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for("ideas.home"))
+        return redirect(url_for("messages.message"))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()

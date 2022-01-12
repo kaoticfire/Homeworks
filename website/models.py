@@ -26,7 +26,7 @@ class Needed(db.Model):
 
 class Tasks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    task = db.Column(db.Integer, db.ForeignKey('chore.id'))
+    task = db.Column(db.String(100))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     is_active = db.Column(db.Boolean, default=True)
@@ -37,7 +37,6 @@ class Chore(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(100), nullable=False)
     is_weekend = db.Column(db.Boolean, default=True)
-    chores = db.relationship('Tasks', backref='tasks')
 
 
 class Message(db.Model):
