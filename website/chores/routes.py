@@ -12,7 +12,7 @@ chores = Blueprint('chores', __name__)
 @chores.route('/chore')
 def chore():
     if current_user.is_parent:
-        tasks = Tasks.query.filter_by(is_approved=False)
+        tasks = Tasks.query.filter_by(is_approved=False).order_by(Tasks.user_id.desc())
     else:
         tasks = Tasks.query.filter_by(user_id=current_user.id, is_active=True)
     return render_template('chore.html', user=current_user, tasks=tasks)
