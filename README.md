@@ -21,8 +21,8 @@ Contributions are welcomed.
 
 ## GUI Layout
 
-![Screenshot from 2022-01-11 01-35-07](https://user-images.githubusercontent.com/6629526/148908528-58c697fa-662e-4a6c-b0c2-428f22641d82.png)  
+![login](https://user-images.githubusercontent.com/6629526/149611332-b0e20c44-9c25-4508-8363-80f51550db40.png)  
 
-![Screenshot from 2022-01-11 01-31-59](https://user-images.githubusercontent.com/6629526/148908455-a088e215-8f15-4494-8f1b-60d48d841542.png)  
+![mobile_messages](https://user-images.githubusercontent.com/6629526/149611341-641207ce-cc40-468d-97e2-d16914a20bc2.png)  
 
-![Screenshot from 2022-01-11 01-34-36](https://user-images.githubusercontent.com/6629526/148908362-4ebe28a2-ec50-4846-91ff-599169718df0.png)
+![desktop_messages](https://user-images.githubusercontent.com/6629526/149611359-6f0a3d77-f3fb-4e6e-96ce-14e4576aa3fd.png)
