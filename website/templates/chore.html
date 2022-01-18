@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %} - Chores{% endblock %} {% block content %}
 <h1 align="center">Chore List</h1>
-    {% for task in tasks %}
+    {% for task in tasks.items %}
         {% if user.is_parent %}
             <article class="media content-section">
                 <img class="rounded-circle article-img img-fluid"
@@ -38,6 +38,17 @@
                     </div>
                 </div>
             </article>
+        {% endif %}
+    {% endfor %}
+    {% for page_num in tasks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+          {% if tasks.page == page_num %}
+            <a class="btn btn-outline-info disabled mb-4" href="{{ url_for('chores.chore', page=page_num) }}">{{ page_num }}</a>
+          {% else %}
+            <a class="btn btn-link mb-4" href="{{ url_for('chores.chore', page=page_num) }}">{{ page_num }}</a>
+          {% endif %}
+        {% else %}
+          ..
         {% endif %}
     {% endfor %}
 {% endblock %}
