@@ -10,3 +10,4 @@ website/database.db
 website/static/pics
 debug.log
 .dcignore
+.dccache
