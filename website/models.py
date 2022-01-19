@@ -59,6 +59,7 @@ class User(db.Model, UserMixin):
     chores = db.relationship('Tasks', backref='owner', lazy=True)
     msgs = db.relationship('Message', backref='receiver', lazy=True)
     is_parent = db.Column(db.Boolean, default=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
     def get_reset_token(self, expires_sec=600):
         sizer = Serializer(current_app.config['SECRET_KEY'], expires_sec)

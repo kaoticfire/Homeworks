@@ -46,12 +46,14 @@
                         <a class="nav-item nav-link" href="/" id="ideas">Dinner</a>
                         <a class="nav-item nav-link" href="/message" id="message">Messages</a>
                         <a class="nav-item nav-link" href="/supplies" id="supplies">Supplies</a>
-                        <a class="nav-item nav-link" href="/supply_report" id="report_supply">Report</a>
                       </div>
                       <!-- Navbar Right Side -->
                       <div class="navbar-nav">
                         {% if current_user.is_parent %}
-                          <a class="nav-item nav-link" href="/admin" id="admin">Admin</a>
+                          {% if current_user.is_admin %}
+                            <a class="nav-item nav-link" href="/admin" id="admin">Admin</a>
+                          {% endif %}
+                          <a class="nav-item nav-link" href="/supply_report" id="report_supply">Report</a>
                           <a class="nav-item nav-link" href="/sign_up" id="signUp">Invite User</a>
                         {% endif %}
                         <a class="nav-item nav-link" href="/logout" id="logout">Logout</a>
