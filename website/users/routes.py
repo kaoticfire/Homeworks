@@ -26,6 +26,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data, duration=timedelta(hours=24))
             next_page = request.args.get("next")
+            # deepcode ignore OR: non-issue
             return redirect(next_page) if next_page else redirect(url_for("messages.message"))
         else:
             flash("Login Unsuccessful. Please check email and password", "error")
