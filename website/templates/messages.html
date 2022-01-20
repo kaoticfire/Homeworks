@@ -1,39 +1,39 @@
 {% extends "base.html" %}
-{% block title %} - Messages{% endblock %}
+{% block title %} - Messages {% endblock %}
 {% block content %}
 <h1 align="center">Messages</h1>
-  <a class="nav-item nav-link btn btn-dark btn-lg mb-2" href="/new_message" id="new_message" role="button">New Message</a>
-  {% for item in messages %}
+<a class="nav-item nav-link btn btn-dark btn-lg mb-2" href="/new_message" id="new_message" role="button">New Message</a>
+{% for item in messages %}
     {% if item.sender == user %}
-      <article class="media content-section">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-1 ml-2" href="#">{{ item.sender }}</a>  to {{ item.receiver.first_name }} on
-            <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
-          </div>
-          <p class="mr-1 ml-2">{{ item.message }}</p>
-        </div>
-      </article>
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-1 ml-2" href="#">{{ item.sender }}</a> to {{ item.receiver.first_name }} on
+                    <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
+                </div>
+                <p class="mr-1 ml-2">{{ item.message }}</p>
+            </div>
+        </article>
     {% elif item.receiver.first_name == user %}
-      <article class="media content-section">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-1 ml-2" href="#">{{ item.sender }}</a>  to {{ item.receiver.first_name }} on
-            <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
-          </div>
-          <p class="mr-1 ml-2">{{ item.message }}</p>
-        </div>
-      </article>
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-1 ml-2" href="#">{{ item.sender }}</a> to {{ item.receiver.first_name }} on
+                    <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
+                </div>
+                <p class="mr-1 ml-2">{{ item.message }}</p>
+            </div>
+        </article>
     {% elif item.receiver.first_name == 'All' %}
-      <article class="media content-section">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-1 ml-2" href="#">{{ item.sender }}</a>  to {{ item.receiver.first_name }} on
-            <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
-          </div>
-          <p class="mr-1 ml-2">{{ item.message }}</p>
-        </div>
-      </article>
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-1 ml-2" href="#">{{ item.sender }}</a> to {{ item.receiver.first_name }} on
+                    <small class="text-muted"> - {{ item.date.strftime('%Y-%m-%d') }}</small>
+                </div>
+                <p class="mr-1 ml-2">{{ item.message }}</p>
+            </div>
+        </article>
     {% endif %}
-  {% endfor %}
+{% endfor %}
 {% endblock %}
