@@ -8,11 +8,10 @@ from flask_login import LoginManager
 from website.admin import MyView, MyAdminIndexView
 from flask_mail import Mail
 from website.config import Config
+from datetime import timedelta
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-login_manager.login_view = 'users.login'
-login_manager.login_message = 'Authorized Access Only'
 admin = Admin()
 mail = Mail()
 
@@ -21,9 +20,18 @@ def create_app(config_class=Config):
     """ create, configure, and start application """
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.permanent_session_lifetime = timedelta(minutes=5)
+
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
     mail.init_app(app)
+
+    login_manager.login_view = 'users.login'
+    login_manager.login_message = 'Authorized Access Only'
+    login_manager.login_message_category = 'info'
+    login_manager.refresh_view = 'users.login'
+    login_manager.needs_refresh_message = 'Session timeout, please re-login to continue'
+    login_manager.needs_refresh_message_category = 'info'
     login_manager.init_app(app)
 
     from website.chores.routes import chores
