@@ -1,63 +1,43 @@
 {% extends 'admin/master.html' %}
 {% block title %}Administration{% endblock %}
 {% block menu_links %}
-    {{ super() }}
+{{ super() }}
 {% endblock menu_links %}
 {% block body %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-primary btn-lg" href="/" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>Ideas</h2></a>
-            </div>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-primary btn-lg" href="/chore" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>Chores</h2></a>
-            </div>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-primary btn-lg" href="/supplies" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>Groceries</h2></a>
-            </div>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-primary btn-lg" href="/message" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>Messages</h2></a>
-            </div>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-warning btn-lg" href="/get-chores" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>New Chores</h2></a>
-            </div>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="btn btn-warning btn-lg" href="/report" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>Report</h2></a>
-            </div>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-success btn-lg" href="/account" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>Account</h2></a>
-            </div>
-          </div>
-        </article>
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-danger btn-lg" href="/logout" role="button" style="height:60px; width:100%; padding:30px 0 0 0;"><h2>Logout</h2></a>
-            </div>
-          </div>
-        </article>
+    <br><br>
+    <table>
+        <tr style="width: 40%; height: 15px;">
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-primary btn-md" href="/" role="button" style="width: 90%;"><h1>Ideas</h1></a>
+            </td>
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-primary btn-md" href="/chore" role="button" style="width: 90%;"><h1>Chores</h1></a>
+            </td>
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-primary btn-md" href="/supplies" role="button" style="width: 90%;"><h1>Groceries</h1></a>
+            </td>
+        </tr>
+        <tr style="width: 40%; height: 15px;">
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-primary btn-sm" href="/message" role="button" style="width: 90%;"><h1>Messages</h1></a>
+            </td>
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-info btn-sm" href="/report" role="button" style="width: 90%;;"><h1>Report</h1></a>
+            </td>
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-info btn-sm" href="/get-chores" role="button" style="width: 90%;"><h1>New Chores</h1></a>
+            </td>
+        </tr>
+        <tr style="width: 40%; height: 15px;">
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-info btn-sm" href="/account" role="button" style="width: 90%;"><h1>Account</h1></a>
+            </td>
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-info btn-sm" href="/password_reset" role="button" style="width: 90%;"><h1>Reset Password</h1></a>
+            </td>
+            <td style="width: 13%; text-align: center;">
+                <a class="btn btn-danger btn-sm" href="/logout" role="button" style="width: 90%;"><h1>Logout</h1></a>
+            </td>
+        </tr>
+    </table>
 {% endblock body %}

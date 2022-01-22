@@ -20,7 +20,7 @@ def create_app(config_class=Config):
     """ create, configure, and start application """
     app = Flask(__name__)
     app.config.from_object(Config)
-    app.permanent_session_lifetime = timedelta(minutes=5)
+    app.permanent_session_lifetime = timedelta(minutes=15)
 
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
@@ -40,6 +40,7 @@ def create_app(config_class=Config):
     from website.supplies.routes import supply
     from website.errors.handlers import errors
     from website.messages.routes import messages
+    from pass_util.routes import passwd
 
     app.register_blueprint(chores, url_prefix='/')
     app.register_blueprint(ideas, url_prefix='/')
@@ -47,6 +48,7 @@ def create_app(config_class=Config):
     app.register_blueprint(supply, url_prefix='/')
     app.register_blueprint(errors, url_prefix='/')
     app.register_blueprint(messages, url_prefix='/')
+    app.register_blueprint(passwd, url_prefix='/')
 
     from .models import User, Note, Chore, Needed, Tasks, Message
 

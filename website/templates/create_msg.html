@@ -9,7 +9,7 @@
             <div class="form-group">
                 {{ form.recipient.label(class="form-control-label") }}
                 {% if form.recipient.errors %}
-                    {{ form.titrecipientle(class="form-control form-control-lg is-invalid") }}
+                    {{ form.recipient(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in form.recipient.errors %}
                             <span>{{ error }}</span>
