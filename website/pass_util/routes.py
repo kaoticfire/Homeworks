@@ -7,6 +7,8 @@ from flask_login import current_user
 
 passwd = Blueprint('passwd', __name__)
 
+# TODO: function not actually changing password, needs different approach or find issue.
+
 
 @passwd.route("/password_reset", methods=["GET", "POST"])
 def reset():
