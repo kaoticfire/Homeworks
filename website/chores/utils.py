@@ -20,6 +20,11 @@ def db_connection(db, query):
 
 
 def chore_sorting(datab):
+    delete_is_approved = "DELETE FROM tasks WHERE is_approved;"
+    db_connection(str(datab), delete_is_approved)
+    delete_vital = "DELETE FROM tasks WHERE task LIKE 'watch%' OR task LIKE 'feed%';"
+    db_connection(str(datab), delete_vital)
+
     current_day = dt.today().weekday()
     if current_day < 5:
         sql_statement = "SELECT data FROM chore WHERE is_weekend IS FALSE;"
