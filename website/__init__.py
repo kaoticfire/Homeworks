@@ -9,13 +9,13 @@ from website.admin import MyView, MyAdminIndexView
 from flask_mail import Mail
 from website.config import Config
 from datetime import timedelta
-# from flask_migrate import Migrate
+# from flask_migrate import Migrate, command
+# from flask_script import Manager
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 admin = Admin()
 mail = Mail()
-# migrate = Migrate()
 
 
 def create_app(config_class=Config):
@@ -27,7 +27,9 @@ def create_app(config_class=Config):
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
     mail.init_app(app)
-    # migrate.init_app(app, db)
+    # Migrate(app, db)
+    # manager = Manager(app)
+    # manager.add_command('db', command)
 
     login_manager.login_view = 'users.login'
     login_manager.login_message = 'Authorized Access Only'
