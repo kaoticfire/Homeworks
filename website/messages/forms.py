@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, TextAreaField
+from wtforms import SubmitField, TextAreaField, StringField
 from wtforms.validators import DataRequired
 from website.models import User
 from wtforms_sqlalchemy.fields import QuerySelectField
@@ -11,6 +11,7 @@ def get_user_info():
 
 
 class MessageForm(FlaskForm):
+    sender = StringField('Sender', validators=[DataRequired()])
     recipient = QuerySelectField('Recipient',
                                  validators=[DataRequired()],
                                  query_factory=get_user_info,

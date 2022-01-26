@@ -19,7 +19,7 @@ def message():
 def new_message():
     form = MessageForm()
     if form.validate_on_submit():
-        msg = Message(sender=current_user.first_name, recipient=form.recipient.data.id, message=form.message.data)
+        msg = Message(sender=form.sender.data, recipient=form.recipient.data.id, message=form.message.data)
         db.session.add(msg)
         db.session.commit()
         flash('Your message has been sent!', 'success')

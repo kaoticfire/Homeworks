@@ -9,22 +9,25 @@ from website.admin import MyView, MyAdminIndexView
 from flask_mail import Mail
 from website.config import Config
 from datetime import timedelta
+# from flask_migrate import Migrate
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 admin = Admin()
 mail = Mail()
+# migrate = Migrate()
 
 
 def create_app(config_class=Config):
     """ create, configure, and start application """
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
     app.permanent_session_lifetime = timedelta(minutes=15)
 
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
     mail.init_app(app)
+    # migrate.init_app(app, db)
 
     login_manager.login_view = 'users.login'
     login_manager.login_message = 'Authorized Access Only'
