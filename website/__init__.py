@@ -9,8 +9,6 @@ from website.admin import MyView, MyAdminIndexView
 from flask_mail import Mail
 from website.config import Config
 from datetime import timedelta
-# from flask_migrate import Migrate, command
-# from flask_script import Manager
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -27,9 +25,6 @@ def create_app(config_class=Config):
     db.init_app(app)
     admin.init_app(app, index_view=MyAdminIndexView())
     mail.init_app(app)
-    # Migrate(app, db)
-    # manager = Manager(app)
-    # manager.add_command('db', command)
 
     login_manager.login_view = 'users.login'
     login_manager.login_message = 'Authorized Access Only'
@@ -47,13 +42,10 @@ def create_app(config_class=Config):
     from website.messages.routes import messages
     from pass_util.routes import passwd
 
-    app.register_blueprint(chores, url_prefix='/')
-    app.register_blueprint(ideas, url_prefix='/')
-    app.register_blueprint(users, url_prefix='/')
-    app.register_blueprint(supply, url_prefix='/')
-    app.register_blueprint(errors, url_prefix='/')
-    app.register_blueprint(messages, url_prefix='/')
-    app.register_blueprint(passwd, url_prefix='/')
+    blu_prints = [chores, ideas, users, supply, errors, messages, passwd]
+
+    for item in blu_prints:
+        app.register_blueprint(item, url_prefix='/')
 
     from .models import User, Note, Chore, Needed, Tasks, Message
 
