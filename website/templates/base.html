@@ -32,11 +32,14 @@
                     {% if current_user.is_authenticated %}
                     <div class="collapse navbar-collapse" id="navbarToggle">
                         <div class="navbar-nav mr-auto">
-                            <a class="nav-item nav-link" href="/account" id="account">Account</a>
                             <a class="nav-item nav-link" href="/chore" id="chores">Chores</a>
-                            <a class="nav-item nav-link" href="/" id="ideas">Dinner</a>
+                            <a class="nav-item nav-link" href="/" id="ideas">Ideas</a>
                             <a class="nav-item nav-link" href="/message" id="message">Messages</a>
                             <a class="nav-item nav-link" href="/supplies" id="supplies">Supplies</a>
+                            {% if current_user.is_parent %}
+                                <a class="nav-item nav-link" href="/supply_report" id="report_supply">Report</a>
+                                <a class="nav-item nav-link" href="/sign_up" id="signUp">Invite User</a>
+                            {% endif %}
                         </div>
                         <!-- Navbar Right Side -->
                         <div class="navbar-nav">
@@ -44,10 +47,9 @@
                                 {% if current_user.is_admin %}
                                     <a class="nav-item nav-link" href="/admin" id="admin">Admin</a>
                                 {% endif %}
-                                <a class="nav-item nav-link" href="/supply_report" id="report_supply">Report</a>
-                                <a class="nav-item nav-link" href="/sign_up" id="signUp">Invite User</a>
                             {% endif %}
-                            <a class="nav-item nav-link" href="/logout" id="logout">Logout</a>
+                            <a class="nav-item nav-link" href="/account" id="account">My Profile</a>
+                            <a class="nav-item nav-link" href="/logout" id="logout">{{ current_user.first_name }}</a>
                         </div>
                     {% endif %}
                     </div>

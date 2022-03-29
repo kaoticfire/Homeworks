@@ -22,7 +22,7 @@
                 <a class="btn btn-primary btn-sm" href="/message" role="button" style="width: 90%;"><h1>Messages</h1></a>
             </td>
             <td style="width: 13%; text-align: center;">
-                <a class="btn btn-info btn-sm" href="/report" role="button" style="width: 90%;;"><h1>Report</h1></a>
+                <a class="btn btn-info btn-sm" href="/report" role="button" style="width: 90%;;"><h1>Reports</h1></a>
             </td>
             <td style="width: 13%; text-align: center;">
                 <a class="btn btn-info btn-sm" href="/get-chores" role="button" style="width: 90%;"><h1>New Chores</h1></a>
@@ -30,13 +30,17 @@
         </tr>
         <tr style="width: 40%; height: 15px;">
             <td style="width: 13%; text-align: center;">
-                <a class="btn btn-info btn-sm" href="/account" role="button" style="width: 90%;"><h1>Account</h1></a>
+                <a class="btn btn-info btn-sm" href="/account" role="button" style="width: 90%;">
+                    <h1>{{ current_user.first_name }}'s Profile</h1>
+                </a>
             </td>
             <td style="width: 13%; text-align: center;">
                 <a class="btn btn-info btn-sm" href="/password_reset" role="button" style="width: 90%;"><h1>Reset Password</h1></a>
             </td>
             <td style="width: 13%; text-align: center;">
-                <a class="btn btn-danger btn-sm" href="/logout" role="button" style="width: 90%;"><h1>Logout</h1></a>
+                <a class="btn btn-danger btn-sm" href="/logout" role="button" style="width: 90%;">
+                    <h1>Logout {{current_user.first_name }}</h1>
+                </a>
             </td>
         </tr>
     </table>
