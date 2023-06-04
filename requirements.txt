@@ -49,7 +49,7 @@ pycosat==0.6.3
 pycparser==2.21
 pylev==1.4.0
 pyparsing==3.0.8
-requests==2.27.1
+requests==2.31.0
 requests-toolbelt==0.9.1
 ruamel.yaml==0.17.21
 ruamel.yaml.clib==0.2.6
