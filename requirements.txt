@@ -13,7 +13,7 @@ clikit==0.6.2
 crashtest==0.3.1
 cryptography==42.0.2
 distlib==0.3.4
-dnspython==2.2.1
+dnspython==2.6.1
 email-validator==1.2.1
 filelock==3.6.0
 Flask==2.3.2
