@@ -66,5 +66,5 @@ webencodings==0.5.1
 Werkzeug==3.0.3
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
-zipp==3.8.0
+zipp==3.19.1
 setuptools==65.5.1
