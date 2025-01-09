@@ -28,7 +28,7 @@ idna==3.7
 importlib-metadata==4.11.3
 itsdangerous==2.1.2
 jeepney==0.7.1
-Jinja2==3.1.4
+Jinja2==3.1.5
 keyring==21.8.0
 lockfile==0.12.2
 lxml==4.9.1
