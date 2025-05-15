@@ -39,7 +39,7 @@ passlib==1.7.4
 pastel==0.2.1
 pexpect==4.8.0
 Pillow==10.3.0
-pipenv==2022.5.2
+pipenv==2025.0.2
 pkginfo==1.8.2
 platformdirs==2.5.2
 poetry==1.1.13
@@ -67,4 +67,4 @@ Werkzeug==3.0.6
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
 zipp==3.19.1
-setuptools==70.0.0
+setuptools==78.1.1
