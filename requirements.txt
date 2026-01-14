@@ -15,7 +15,7 @@ cryptography==44.0.1
 distlib==0.3.4
 dnspython==2.6.1
 email-validator==1.2.1
-filelock==3.20.1
+filelock==3.20.3
 Flask==2.3.2
 Flask-Admin==1.6.0
 Flask-Login==0.6.1
@@ -60,10 +60,10 @@ soupsieve==2.3.2.post1
 SQLAlchemy==1.4.36
 tomlkit==0.10.2
 urllib3==2.6.3
-virtualenv==20.26.6
+virtualenv==20.36.1
 virtualenv-clone==0.5.7
 webencodings==0.5.1
-Werkzeug==3.1.4
+Werkzeug==3.1.5
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
 zipp==3.19.1
