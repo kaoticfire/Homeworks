@@ -42,7 +42,7 @@ Pillow==12.2.0
 pipenv==2025.0.2
 pkginfo==1.8.2
 platformdirs==2.5.2
-poetry==1.1.13
+poetry==2.3.4
 poetry-core==1.1.0a7
 ptyprocess==0.7.0
 pycosat==0.6.3
