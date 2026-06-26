@@ -33,7 +33,7 @@ keyring==21.8.0
 lockfile==0.12.2
 lxml==6.1.0
 MarkupSafe==2.1.1
-msgpack==1.0.3
+msgpack==1.2.1
 packaging==20.9
 passlib==1.7.4
 pastel==0.2.1
