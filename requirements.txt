@@ -67,4 +67,4 @@ Werkzeug==3.1.6
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
 zipp==3.19.1
-setuptools==78.1.1
+setuptools==83.0.0
