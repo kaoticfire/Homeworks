@@ -59,11 +59,11 @@ six==1.16.0
 soupsieve==2.9.0
 SQLAlchemy==1.4.36
 tomlkit==0.10.2
-urllib3==2.7.0
-virtualenv==20.36.1
+urllib3==2.8.0
+virtualenv==21.7.11
 virtualenv-clone==0.5.7
 webencodings==0.5.1
-Werkzeug==3.1.6
+Werkzeug==3.1.9
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
 zipp==3.19.1
