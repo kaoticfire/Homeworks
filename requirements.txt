@@ -1,4 +1,4 @@
-bcrypt==3.2.2
+fbcrypt==3.2.2
 beautifulsoup4==4.11.1
 blinker==1.4
 CacheControl==0.12.11
@@ -60,7 +60,7 @@ soupsieve==2.9.0
 SQLAlchemy==1.4.36
 tomlkit==0.10.2
 urllib3==2.8.0
-virtualenv==21.7.11
+virtualenv==21.7.12
 virtualenv-clone==0.5.7
 webencodings==0.5.1
 Werkzeug==3.1.9
