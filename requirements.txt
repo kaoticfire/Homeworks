@@ -38,7 +38,7 @@ packaging==20.9
 passlib==1.7.4
 pastel==0.2.1
 pexpect==4.8.0
-Pillow==12.3.0
+Pillow==13.0.0
 pipenv==2025.0.2
 pkginfo==1.8.2
 platformdirs==2.5.2
@@ -60,11 +60,11 @@ soupsieve==2.9.0
 SQLAlchemy==1.4.36
 tomlkit==0.10.2
 urllib3==2.8.0
-virtualenv==21.7.12
+virtualenv==21.7.13
 virtualenv-clone==0.5.7
 webencodings==0.5.1
 Werkzeug==3.1.9
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
 zipp==3.19.1
-setuptools==83.0.0
+setuptools==84.1.0
